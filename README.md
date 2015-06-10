@@ -1,5 +1,7 @@
 # highway-to-URhell
 
+[![Build Status](https://travis-ci.org/highway-to-urhell/highway-to-urhell-web.svg)](https://travis-ci.org/highway-to-urhell/highway-to-urhell-web)
+
 ## H2H - Web
 
 H2H-Web is a web application designed to
