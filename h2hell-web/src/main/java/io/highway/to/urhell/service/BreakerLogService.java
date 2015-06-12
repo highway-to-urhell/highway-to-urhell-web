@@ -8,15 +8,13 @@ import io.highway.to.urhell.domain.ThunderApp;
 import io.highway.to.urhell.exception.DateIncomingException;
 import io.highway.to.urhell.exception.PathNameException;
 import io.highway.to.urhell.exception.TokenException;
-
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.util.List;
 
 @Named
 public class BreakerLogService {
@@ -53,8 +51,8 @@ public class BreakerLogService {
 			String dateIncoming) {
 		validate(pathClassMethodName, token, dateIncoming);
 		ThunderApp th = thunderAppDao.findByToken(token);
-		// Add breaker log Servive
-		createBreakerLog(th, pathClassMethodName, dateIncoming);
+        // Add breaker log Service
+        createBreakerLog(th, pathClassMethodName, dateIncoming);
 	}
 
 	private void validate(String pathClassMethodName, String token,

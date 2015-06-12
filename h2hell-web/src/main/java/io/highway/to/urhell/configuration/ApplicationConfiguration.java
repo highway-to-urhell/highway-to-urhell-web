@@ -13,7 +13,7 @@ public class ApplicationConfiguration {
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("WEB-INF/demmo_message");
+        messageSource.setBasename("WEB-INF/demo_message");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
