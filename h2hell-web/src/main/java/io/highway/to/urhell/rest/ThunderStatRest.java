@@ -1,9 +1,13 @@
 package io.highway.to.urhell.rest;
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import io.highway.to.urhell.domain.ThunderApp;
 import io.highway.to.urhell.rest.domain.MessageStat;
 import io.highway.to.urhell.service.ThunderAppService;
 import io.highway.to.urhell.service.ThunderStatService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,20 +19,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-
 @Named
 @Path("/ThunderStat")
 @Api(value = "/ThunderStat", description = "ThunderStat management")
 public class ThunderStatRest {
-	private static final Logger LOG = LoggerFactory
-			.getLogger(ThunderStatRest.class);;
-	
-	@Inject
+    private static final Logger LOG = LoggerFactory.getLogger(ThunderStatRest.class);
+
+    @Inject
 	private ThunderStatService thunderStatService;
 	@Inject
 	private ThunderAppService thunderAppService;
