@@ -6,13 +6,11 @@ import io.highway.to.urhell.dao.ThunderStatDao;
 import io.highway.to.urhell.domain.BreakerLog;
 import io.highway.to.urhell.domain.ThunderApp;
 import io.highway.to.urhell.domain.ThunderStat;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 @Named
 public class ThunderAdminService {
@@ -28,8 +26,8 @@ public class ThunderAdminService {
 	public void purgeStatByToken(String token) {
 		List<ThunderStat> liststat = thunderStatDao.findByToken(token);
 		for(ThunderStat ts : liststat){
-			ts.setCount(new Long(0));
-			thunderStatDao.save(ts);
+            ts.setCount(0L);
+            thunderStatDao.save(ts);
 		}
 		purgeBreakerByToken(token);
 	}

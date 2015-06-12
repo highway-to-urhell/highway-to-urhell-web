@@ -6,17 +6,15 @@ import io.highway.to.urhell.domain.EntryPathData;
 import io.highway.to.urhell.domain.ThunderApp;
 import io.highway.to.urhell.domain.ThunderStat;
 import io.highway.to.urhell.rest.domain.MessageStat;
-
-import java.util.Collections;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.util.Collections;
+import java.util.List;
 
 @Named
 @Lazy(false)
@@ -72,13 +70,13 @@ public class ThunderStatService {
 			ts = new ThunderStat();
 			ts.setPathClassMethodName(pathClassMethodName);
 			ts.setThunderApp(ta);
-			ts.setCount(new Long(0));
-			ts.setHttpmethod(httpmethod);
+            ts.setCount(0L);
+            ts.setHttpmethod(httpmethod);
 			ts.setUri(uri);
 			thunderStatDao.save(ts);
 		} else {
-			ts.setCount(new Long(0));
-		}
+            ts.setCount(0L);
+        }
 
 	}
 
