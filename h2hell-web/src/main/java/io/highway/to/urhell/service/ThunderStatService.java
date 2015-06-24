@@ -1,6 +1,7 @@
 package io.highway.to.urhell.service;
 
 import io.highway.to.urhell.dao.BreakerLogDao;
+import io.highway.to.urhell.dao.MetricsTimerDao;
 import io.highway.to.urhell.dao.ThunderStatDao;
 import io.highway.to.urhell.domain.EntryPathData;
 import io.highway.to.urhell.domain.ThunderApp;
@@ -28,6 +29,8 @@ public class ThunderStatService {
 	private ThunderStatDao thunderStatDao;
 	@Inject
 	private BreakerLogDao breakerLogDao;
+	@Inject
+	private MetricsTimerDao metricsTimerDao;
 	
 	public MessageStat analysisStat(String token){
 		MessageStat ms = new MessageStat();
@@ -36,7 +39,9 @@ public class ThunderStatService {
 		for (ThunderStat ts : listThunderStat) {
 			Long count = breakerLogDao.findByPathClassMethodNameAndToken(
 					ts.getPathClassMethodName(), ts.getThunderApp().getToken());
+			Long averageTime = metricsTimerDao.findAverageFromPathClassMethodNameAndToken(ts.getPathClassMethodName(), ts.getThunderApp().getToken());
 			ts.setCount(count);
+			ts.setAverageTime(averageTime);
 		}
 		Collections.sort(listThunderStat);
 		ms.setListThunderStat(listThunderStat);

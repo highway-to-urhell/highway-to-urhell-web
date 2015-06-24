@@ -2,9 +2,11 @@ package io.highway.to.urhell.rest;
 
 import io.highway.to.urhell.domain.H2hConfig;
 import io.highway.to.urhell.domain.MessageBreaker;
+import io.highway.to.urhell.domain.MessageMetrics;
 import io.highway.to.urhell.domain.MessageThunderApp;
 import io.highway.to.urhell.exception.NotExistThunderAppException;
 import io.highway.to.urhell.service.BreakerLogService;
+import io.highway.to.urhell.service.MetricsTimerService;
 import io.highway.to.urhell.service.ThunderAppService;
 
 import java.util.List;
@@ -37,6 +39,8 @@ public class ThunderServerEntryRest {
 	private ThunderAppService thunderAppService;
 	@Inject
 	private BreakerLogService breakerLogService;
+	@Inject
+	private MetricsTimerService metricsTimerService;
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -72,6 +76,16 @@ public class ThunderServerEntryRest {
 	@Path("/addBreaker")
 	public Response addBreaker(List<MessageBreaker> listBreaker) {
 		breakerLogService.addListBreaker(listBreaker);
+		return Response.status(Status.ACCEPTED).entity("OK").build();
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@ApiOperation("Add indicator Performance Breaker from Agent Thunder")
+	@Path("/addPerformance")
+	public Response addPerformance(List<MessageMetrics> listPerf) {
+		metricsTimerService.addListPerformance(listPerf);
 		return Response.status(Status.ACCEPTED).entity("OK").build();
 	}
 
