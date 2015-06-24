@@ -1,12 +1,12 @@
 package io.highway.to.urhell.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class ThunderStat implements Comparable<ThunderStat>{
@@ -94,7 +94,7 @@ public class ThunderStat implements Comparable<ThunderStat>{
 
 	@Override
 	public int compareTo(ThunderStat obj) {
-		return Long.compare( obj.getCount().longValue(),count.longValue());
-	}
+        return Long.compare(obj.getCount(), count);
+    }
 
 }

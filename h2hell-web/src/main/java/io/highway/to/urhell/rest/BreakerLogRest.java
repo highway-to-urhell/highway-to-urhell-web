@@ -1,34 +1,26 @@
 package io.highway.to.urhell.rest;
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import io.highway.to.urhell.dao.BreakerLogDao;
 import io.highway.to.urhell.domain.BreakerLog;
-
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import java.util.List;
 
 @Named
 @Path("/BreakerLog")
 @Api(value = "/BreakerLog", description = "BreakerLog management")
 public class BreakerLogRest {
 
-	private static final Logger LOG = LoggerFactory
-			.getLogger(ThunderStatRest.class);;
+    private static final Logger LOG = LoggerFactory.getLogger(ThunderStatRest.class);
 
 	@Inject
 	private BreakerLogDao breakerLogDao;

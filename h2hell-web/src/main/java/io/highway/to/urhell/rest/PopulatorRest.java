@@ -1,15 +1,16 @@
 package io.highway.to.urhell.rest;
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import io.highway.to.urhell.dao.BreakerLogDao;
 import io.highway.to.urhell.dao.ThunderAppDao;
 import io.highway.to.urhell.dao.ThunderStatDao;
 import io.highway.to.urhell.domain.BreakerLog;
 import io.highway.to.urhell.domain.ThunderApp;
 import io.highway.to.urhell.domain.ThunderStat;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Random;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,13 +20,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 
 @Named
 @Path("/Populator")
@@ -90,8 +87,8 @@ public class PopulatorRest {
 		ThunderStat ts = new ThunderStat();
 		ts.setPathClassMethodName(methodName);
 		ts.setThunderApp(ta);
-		ts.setCount(new Long(0));
-		ts.setHttpmethod("GET");
+        ts.setCount(0L);
+        ts.setHttpmethod("GET");
 		Random randomGenerator = new Random();
 		int randomInt = randomGenerator.nextInt(100);
 		ts.setUri("/titi" + randomInt);

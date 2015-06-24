@@ -16,7 +16,7 @@ Tips :
 * "See statistics" to have a precise view of all detected entry points
 
 ## Launch h2hell-web
-Juste type
+Just type
 ```
 mvn
 ```
