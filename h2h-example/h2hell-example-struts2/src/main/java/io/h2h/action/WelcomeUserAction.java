@@ -22,6 +22,11 @@ public class WelcomeUserAction {
 		int range = (10 - 0) + 1;
 		int cal = (int) (Math.random() * range) + 0;
 		if (cal%2 == 0){
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				log.error("InterruptedException "+e);
+			}
 			log.error(" Modulo 2 ");
 			return "SUCCESS";
 		}else{
