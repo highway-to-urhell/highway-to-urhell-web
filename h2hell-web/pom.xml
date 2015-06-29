@@ -4,7 +4,7 @@
 
 	<groupId>io.highway.to.urhell</groupId>
 	<artifactId>h2hell-web</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>h2hell-web</name>
@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>io.highway.to.urhell</groupId>
 			<artifactId>h2hell-core</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 		<!-- ~~~~~~~~~~~ -->
 		<!-- PERSISTENCE -->
