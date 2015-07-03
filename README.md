@@ -23,3 +23,7 @@ mvn
 in h2hell-web directory.
 
 You can edit h2h.properties to change : Swagger url , DB connexion, Hibernate configuration
+
+## Supports
+[![JetBrains](https://www.jetbrains.com/company/docs/logo_jetbrains.png?raw=true)](https://www.jetbrains.com/webstorm/)
+- Thanks to JetBrains for providing licenses to build this project.
