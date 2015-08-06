@@ -69,6 +69,7 @@ public class ThunderStatService {
 		String methodName=entry.getMethodName();
 		String uri = entry.getUri();
 		String httpmethod=entry.getHttpMethod().name();
+		Boolean audit = entry.getAudit();
 		String pathClassMethodName = className + "." + methodName;
 		ThunderStat ts = thunderStatDao.findByPathClassMethodNameAndToken(
 				pathClassMethodName, ta.getToken());
@@ -79,6 +80,7 @@ public class ThunderStatService {
             ts.setCount(0L);
             ts.setHttpmethod(httpmethod);
 			ts.setUri(uri);
+			ts.setAudit(audit);
 			thunderStatDao.save(ts);
 		} else {
             ts.setCount(0L);

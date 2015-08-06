@@ -25,6 +25,16 @@ public class ThunderStat implements Comparable<ThunderStat>{
 	private Boolean falsePositive = false;
 	private String uri;
 	private String httpmethod;
+	private Boolean audit;
+
+	public Boolean getAudit() {
+		return audit;
+	}
+
+	public void setAudit(Boolean audit) {
+		this.audit = audit;
+	}
+
 	private Long averageTime;
 	
 	public Long getAverageTime() {
