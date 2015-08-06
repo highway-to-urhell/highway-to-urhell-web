@@ -34,6 +34,7 @@ public class ThunderStatService {
 		MessageStat ms = new MessageStat();
 		LOG.info("analysis for token {}",token);
 		List<ThunderStat> listThunderStat = thunderStatDao.findByToken(token);
+		LOG.info("SIZE stat for token {}",listThunderStat.size());
 		for (ThunderStat ts : listThunderStat) {
 			Long count = breakerLogDao.findByPathClassMethodNameAndToken(
 					ts.getPathClassMethodName(), ts.getThunderApp().getToken());
