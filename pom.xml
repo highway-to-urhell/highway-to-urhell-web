@@ -584,6 +584,12 @@
 		</profile>
 		<profile>
 			<id>secu</id>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>mvnrepository</id>
+					<url>http://mvnrepository.com/artifact/</url>
+				</pluginRepository>
+			</pluginRepositories>
 			<build>
 				<plugins>
 					<plugin>
@@ -615,6 +621,12 @@
 		</profile>
 		<profile>
 			<id>sonar</id>
+			<pluginRepositories>
+				<pluginRepository>
+						<id>mvnrepository</id>
+						<url>http://mvnrepository.com/artifact/</url>
+				</pluginRepository>
+			</pluginRepositories>
 			<build>
 				<plugins>
 					<plugin>
