@@ -20,7 +20,7 @@
 	]]></description>
 
 	<!-- context -->
-	<context:component-scan base-package="io.highway.to.urhell" />
+	<context:component-scan base-package="com.highway2urhell" />
 	<context:property-placeholder location="classpath:source.properties" />
 
 	<context:annotation-config  />
