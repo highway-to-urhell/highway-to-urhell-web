@@ -11,6 +11,8 @@
 	<version>1.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<url>http://www.highway2urhell.com/</url>
+	<name>highway2urhell-web</name>
+	<description>H2H-Web is a web application designed to display all entry paths for each application, monitor activity for each entry point, save each pentesting</description>
 
 	<modules>
 		<module>h2hell-web</module>
@@ -278,7 +280,7 @@
 					<!-- http://maven.apache.org/plugins/maven-release-plugin/ -->
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-release-plugin</artifactId>
-					<version>2.4.2</version>
+					<version>2.5.2</version>
 				</plugin>
 				<plugin>
 					<!-- http://maven.apache.org/plugins/maven-deploy-plugin/ -->
@@ -388,10 +390,38 @@
 					<argLine>-Xmx512m -XX:MaxPermSize=256m</argLine>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<releaseProfiles>release</releaseProfiles>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
 	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 		<profile>
 			<id>secu</id>
 			<build>
