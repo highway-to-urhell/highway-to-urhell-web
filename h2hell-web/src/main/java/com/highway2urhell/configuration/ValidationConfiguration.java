@@ -7,10 +7,6 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
 public class ValidationConfiguration {
-    /**
-     * Enable the bean validation provider, and configure it to use the
-     * messageSource when resolving properties
-     */
     @Bean
     public LocalValidatorFactoryBean validator(MessageSource messageSource) {
         LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();

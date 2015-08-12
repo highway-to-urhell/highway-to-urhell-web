@@ -26,18 +26,11 @@ public class JPAConfiguration {
     @Resource(name = "dataSource")
     private DataSource dataSource;
 
-    /**
-     * Enable exception translation for beans annotated with @Repository
-     */
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
-    /**
-     * @throws IOException
-     * @see read http://www.springframework.org/docs/reference/transaction.html
-     */
     @Bean
     @Primary
     public PlatformTransactionManager transactionManager() throws IOException {
@@ -46,11 +39,6 @@ public class JPAConfiguration {
         return transactionManager;
     }
 
-    /**
-     * Build the entity manager with Hibernate as a provider.
-     * 
-     * @throws IOException
-     */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws IOException {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
