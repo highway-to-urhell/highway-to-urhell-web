@@ -467,6 +467,12 @@
 					<artifactId>versions-maven-plugin</artifactId>
 					<version>2.1</version>
 				</plugin>
+				<plugin>
+					<!-- http://maven.apache.org/plugins/maven-war-plugin/ -->
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.6</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
