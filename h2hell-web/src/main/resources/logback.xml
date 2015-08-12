@@ -51,7 +51,7 @@
 	<logger name="SLF4J" level="INFO" />
 	<logger name="JCL" level="INFO" />
 
-	<logger name="io.highway.to.urhell" level="info" />
+	<logger name="com.highway2urhell" level="info"/>
 
 	<root level="info">
 		<appender-ref ref="Console" />

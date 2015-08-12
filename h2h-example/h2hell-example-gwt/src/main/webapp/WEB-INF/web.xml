@@ -8,7 +8,7 @@
   <!-- Servlets -->
   <servlet>
     <servlet-name>greetServlet</servlet-name>
-    <servlet-class>io.highway.to.urhell.server.GreetingServiceImpl</servlet-class>
+      <servlet-class>com.highway2urhell.server.GreetingServiceImpl</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -23,7 +23,7 @@
 
 <servlet>
         <servlet-name>h2h</servlet-name>
-        <servlet-class>io.highway.to.urhell.servlet.H2hellServlet</servlet-class>
+    <servlet-class>com.highway2urhell.servlet.H2hellServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>

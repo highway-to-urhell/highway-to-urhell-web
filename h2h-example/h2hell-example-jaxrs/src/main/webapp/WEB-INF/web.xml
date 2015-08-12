@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0"
+		 xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	metadata-complete="true">
 	<!-- Remove classpath scanning (from servlet 3.0) in order to speed web 
@@ -27,7 +27,7 @@
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 		<init-param>
 			<param-name>javax.ws.rs.Application</param-name>
-			<param-value>io.highway.to.urhell.configuration.RestConfiguration</param-value>
+			<param-value>com.highway2urhell.configuration.RestConfiguration</param-value>
 		</init-param>
 		<init-param>
 			<param-name>jersey.config.server.provider.classnames</param-name>
@@ -40,7 +40,7 @@
 	</servlet-mapping>
 	<servlet>
         <servlet-name>h2h</servlet-name>
-        <servlet-class>io.highway.to.urhell.servlet.H2hellServlet</servlet-class>
+		<servlet-class>com.highway2urhell.servlet.H2hellServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>

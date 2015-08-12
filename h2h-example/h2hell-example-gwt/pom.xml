@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project
-        xmlns="http://maven.apache.org/POM/4.0.0"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://maven.apache.org/POM/4.0.0"
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>io.highway.to.urhell</groupId>
+    <groupId>com.highway2urhell</groupId>
     <artifactId>h2hell-example-gwt</artifactId>
     <packaging>war</packaging>
     <version>1.0.0-SNAPSHOT</version>
@@ -117,7 +117,7 @@ http://maven.apache.org/maven-v4_0_0.xsd">
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>io.highway.to.urhell</groupId>
+                                    <groupId>com.highway2urhell</groupId>
                                     <artifactId>h2hell-distribution</artifactId>
                                     <version>1.0.0</version>
                                     <classifier>distrib</classifier>

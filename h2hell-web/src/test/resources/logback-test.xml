@@ -33,7 +33,7 @@
 	<logger name="SLF4J" level="WARN" />
 	<logger name="JCL" level="INFO" />
 
-	<logger name="io.highway.to.urhell" level="INFO" />
+	<logger name="com.highway2urhell" level="INFO"/>
 
 	<root level="warn">
 		<appender-ref ref="Console" />
