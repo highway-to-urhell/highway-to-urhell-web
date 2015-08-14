@@ -21,6 +21,14 @@ Just type
 mvn
 ```
 in h2hell-web directory.
+You can access at application example via l'url http://localhost:8090/core/
+
+## Launch example
+After launch h2hell-web via mvn, go to h2h-example/h2hell-example-struts2 and launch 
+```
+mvn
+```
+You can access at application example via l'url http://localhost:8080/core/
 
 You can edit h2h.properties to change : Swagger url , DB connexion, Hibernate configuration
 
