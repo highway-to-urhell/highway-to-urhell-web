@@ -13,36 +13,16 @@
 
 package org.springframework.amqp.rabbit.listener;
 
-import java.io.IOException;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executor;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.ShutdownSignalException;
 import org.aopalliance.aop.Advice;
-
-import org.aspectj.weaver.AjcMemberMaker;
-import org.springframework.amqp.AmqpConnectException;
-import org.springframework.amqp.AmqpException;
-import org.springframework.amqp.AmqpIOException;
-import org.springframework.amqp.AmqpIllegalStateException;
-import org.springframework.amqp.AmqpRejectAndDontRequeueException;
-import org.springframework.amqp.ImmediateAcknowledgeAmqpException;
+import org.springframework.amqp.*;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageListener;
 import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.connection.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory.CacheMode;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils;
-import org.springframework.amqp.rabbit.connection.ConsumerChannelRegistry;
-import org.springframework.amqp.rabbit.connection.RabbitResourceHolder;
-import org.springframework.amqp.rabbit.connection.RabbitUtils;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
-import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.amqp.rabbit.listener.exception.ConsumerCancelledException;
 import org.springframework.amqp.rabbit.listener.exception.FatalListenerExecutionException;
 import org.springframework.amqp.rabbit.listener.exception.FatalListenerStartupException;
@@ -67,13 +47,21 @@ import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.ShutdownSignalException;
+import java.io.IOException;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import com.highway2urhell.*;
 import com.highway2urhell.domain.*;
 import com.highway2urhell.service.impl.*;
 import java.lang.reflect.*;
+import org.springframework.amqp.rabbit.listener.adapter.*;
+import org.springframework.amqp.remoting.service.AmqpInvokerServiceExporter;
+import org.springframework.messaging.handler.invocation.InvocableHandlerMethod;
 
 /**
  * @author Mark Pollack
@@ -724,42 +712,58 @@ public class SimpleMessageListenerContainer extends AbstractMessageListenerConta
         }
 
         //H2H
-
+/*
         List listEntryPath = new ArrayList();
         EntryPathData entry = new EntryPathData();
         entry.setTypePath(TypePath.LISTENER);
         Object ml = getMessageListener();
+        Class targetClass = null;
+        Method targetMethod = null;
+        String methodName = null;
         if(ml instanceof MessageListenerAdapter)
         {
             MessageListenerAdapter mla = (MessageListenerAdapter) ml;
-
             Field fd = mla.getClass().getDeclaredField("delegate");
             fd.setAccessible(true);
             Object delegate = fd.get(mla);
-            String removeClass = delegate.getClass().toString();
-            if (removeClass.contains("class ")) {
-                removeClass = removeClass.replace("class ", "");
-            }
-            entry.setClassName(removeClass);
-
+            targetClass = delegate.getClass();
             Field f = mla.getClass().getDeclaredField("defaultListenerMethod");
             f.setAccessible(true);
-            String methodName = (String)f.get(mla);
-            entry.setMethodName(methodName);
-
-            String internalSignature = "";
-            Class c =delegate.getClass();
-            Method[] tabMethod = c.getDeclaredMethods();
-            for (int i = 0; i < tabMethod.length; i++) {
-               if (tabMethod[i].getName().equals(methodName)) {
-                   internalSignature = org.objectweb.asm.Type.getMethodDescriptor(tabMethod[i]);
-               }
-            }
-            entry.setSignatureName(internalSignature);
+            methodName = (String)f.get(mla);
+        } else if(ml instanceof MessagingMessageListenerAdapter) {
+            MessagingMessageListenerAdapter mmla = (MessagingMessageListenerAdapter) ml;
+            Field fd = mmla.getClass().getDeclaredField("handlerMethod");
+            fd.setAccessible(true);
+            InvocableHandlerMethod handlerMethod = (InvocableHandlerMethod)(fd.get(mmla));
+            targetClass = handlerMethod.getBeanType();
+            targetMethod = handlerMethod.getMethod();
+            methodName = targetMethod.getName();
+        } else if(ml instanceof AmqpInvokerServiceExporter) {
+            AmqpInvokerServiceExporter aise = (AmqpInvokerServiceExporter) ml;
+            targetClass = aise.getMessageConverter().getClass();
+            methodName = "fromMessage";
         }
+        String className = targetClass.toString();
+        if (className.contains("class ")) {
+            className = className.replace("class ", "");
+        }
+        entry.setClassName(className);
+        entry.setMethodName(methodName);
+        if(targetMethod == null) {
+            Method[] tabMethod = targetClass.getDeclaredMethods();
+            for (int i = 0; i < tabMethod.length; i++) {
+                if (tabMethod[i].getName().equals(methodName)) {
+                    targetMethod = tabMethod[i];
+                }
+            }
+        }
+        String internalSignature = "";
+        if(targetMethod != null)
+            internalSignature = org.objectweb.asm.Type.getMethodDescriptor(targetMethod);
+        entry.setSignatureName(internalSignature);
         listEntryPath.add(entry);
         CoreEngine.getInstance().getFramework("SPRING_AMQP").receiveData(listEntryPath);
-
+*/
     }
 
     @Override
