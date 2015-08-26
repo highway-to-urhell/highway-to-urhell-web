@@ -13,6 +13,15 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+    <filter>
+        <filter-name>h2h</filter-name>
+        <filter-class>com.highway2urhell.filter.H2hellFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>h2h</filter-name>
+        <url-pattern>/h2h/*</url-pattern>
+    </filter-mapping>
 
 	<filter>
 		<filter-name>shallowEtagHeaderFilter</filter-name>
