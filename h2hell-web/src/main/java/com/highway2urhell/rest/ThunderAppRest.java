@@ -70,7 +70,18 @@ public class ThunderAppRest {
 		return Response.status(Status.ACCEPTED).entity(mt).build();
 	}
 
-	
+
+
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation("Find all paths")
+	@Path("/findAllPaths/{token}")
+	public Response findAllPaths(@PathParam("token") String token) {
+		LOG.info("Call findAllPaths ");
+		String msg = launchService.findAllPaths(token);
+		return Response.status(Status.ACCEPTED).entity(msg).build();
+	}
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation("Launch analysis")

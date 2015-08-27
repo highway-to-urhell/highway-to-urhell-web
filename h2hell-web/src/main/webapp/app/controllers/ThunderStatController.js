@@ -13,7 +13,16 @@ var ThunderStatController = function($scope, $routeParams, $http) {
 					$scope.ms = message;
 				});
 	};
-	
+	$scope.findAllPaths = function (token){
+		$scope.messageConfig='Find All Paths for application ';
+		$http.post('api/ThunderApp/findAllPaths/' + token).success(function(message) {
+				$scope.ms = message;
+				$http.post('api/ThunderStat/findThunderStatByToken/' + token)
+					.success(function(message) {
+						$scope.ms = message;
+					});
+			});
+	};
 	$scope.launchAnalysis = function(token) {
 	    	$scope.messageConfig='Analysis Running for application ';
 	        $http.post('api/ThunderApp/launchAnalysis/' + token).success(function(message) {

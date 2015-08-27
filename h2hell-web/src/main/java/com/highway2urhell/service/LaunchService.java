@@ -17,6 +17,26 @@ public class LaunchService {
 	@Inject
 	private ThunderAppDao thunderAppDao;
 
+	public String findAllPaths(String token) {
+		RestTemplate restTemplate = new RestTemplate();
+		ThunderApp th = thunderAppDao.findByToken(token);
+		if (th == null) {
+			return "No config for application with token" + token;
+		}
+		String url = th.getUrlApp() + "h2h/?paths=true";
+		String responseEntity = null;
+		LOG.info("Call app {} for find all paths", url);
+		try {
+			responseEntity = restTemplate
+					.postForObject(url, null, String.class);
+
+		} catch (RestClientException r) {
+			responseEntity = r.getMessage();
+		}
+		LOG.info("result call {} for find all paths", responseEntity);
+		return responseEntity;
+	}
+
 	public String launchAnalysis(String token) {
 		RestTemplate restTemplate = new RestTemplate();
 		ThunderApp th = thunderAppDao.findByToken(token);
@@ -25,7 +45,7 @@ public class LaunchService {
 		}
 		String url = th.getUrlApp() + "h2h/?launch=true";
 		String responseEntity = null;
-		LOG.info("Call app {}", url);
+		LOG.info("Call app {} for launch analysis", url);
 		try {
 			responseEntity = restTemplate
 					.postForObject(url, null, String.class);
@@ -33,7 +53,7 @@ public class LaunchService {
 		} catch (RestClientException r) {
 			responseEntity = r.getMessage();
 		}
-		LOG.info("result call {}", responseEntity);
+		LOG.info("result call {} for launch analysis", responseEntity);
 		return responseEntity;
 	}
 
