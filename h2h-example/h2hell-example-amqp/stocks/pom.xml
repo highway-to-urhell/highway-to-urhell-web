@@ -18,6 +18,7 @@
 		<spring.framework.version>4.1.6.RELEASE</spring.framework.version>
 		<spring.amqp.version>1.4.5.RELEASE</spring.amqp.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<highway2urhell.version>1.0.2-SNAPSHOT</highway2urhell.version>
 	</properties>
 	<profiles>
 		<profile>
@@ -41,7 +42,7 @@
 		<dependency>
 			<groupId>com.highway2urhell</groupId>
 			<artifactId>h2hell-core</artifactId>
-			<version>1.0.2-SNAPSHOT</version>
+			<version>${highway2urhell.version}</version>
 		</dependency>
 
 		<dependency>
@@ -310,7 +311,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
                     <jvmArgs>
-                        -javaagent:${project.build.directory}/h2hell-distribution-1.0.2-SNAPSHOT/h2hell-core-1.0.2-SNAPSHOT.jar -Djava.ext.dirs=${project.build.directory}/h2hell-distribution-1.0.2-SNAPSHOT/ -DH2H_CONFIG=${project.build.directory}/classes/config.properties
+                        -javaagent:${project.build.directory}/h2hell-distribution-1.0.2-SNAPSHOT/h2hell-core-${highway2urhell.version}.jar -Djava.ext.dirs=${project.build.directory}/h2hell-distribution-${highway2urhell.version}/ -DH2H_CONFIG=${project.build.directory}/classes/config.properties -DH2H_PATH=${project.basedir}/src/main/webapp/
                     </jvmArgs>
                     <stopKey>foo</stopKey>
                     <stopPort>9999</stopPort>

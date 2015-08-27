@@ -712,7 +712,7 @@ public class SimpleMessageListenerContainer extends AbstractMessageListenerConta
         }
 
         //H2H
-/*
+
         List listEntryPath = new ArrayList();
         EntryPathData entry = new EntryPathData();
         entry.setTypePath(TypePath.LISTENER);
@@ -763,7 +763,7 @@ public class SimpleMessageListenerContainer extends AbstractMessageListenerConta
         entry.setSignatureName(internalSignature);
         listEntryPath.add(entry);
         CoreEngine.getInstance().getFramework("SPRING_AMQP").receiveData(listEntryPath);
-*/
+
     }
 
     @Override
