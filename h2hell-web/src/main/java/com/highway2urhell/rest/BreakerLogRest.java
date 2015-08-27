@@ -20,7 +20,7 @@ import java.util.List;
 @Api(value = "/BreakerLog", description = "BreakerLog management")
 public class BreakerLogRest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ThunderStatRest.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BreakerLogRest.class);
 
 	@Inject
 	private BreakerLogDao breakerLogDao;

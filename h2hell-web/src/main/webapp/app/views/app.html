@@ -25,11 +25,15 @@
 				<span ng-show="app.numberEntryPoints == 0"  style="font-size: 48px">0</span>
 				
 				<div>
-					<a href="#" class="fa fa-external-link" onclick="window.open('{{app.urlApp}}')"> Launch app</a>
+					<a href="#" class="fa fa-external-link" onclick="window.open('{{app.urlApp}}')">app</a>
 					|
-					<a href="#/thunderstat/{{app.token}}" class="fa fa-bar-chart"> see statistics</a>
+					<a href="#/thunderstat/{{app.token}}" class="fa fa-bar-chart">Paths</a>
 					|
-					<a href="#/breaker/{{app.token}}" class="fa fa-search-plus" > details</a>
+					<a href="#/metricsView/{{app.token}}" class="fa fa-bar-chart">Monitoring</a>
+					|
+					<a href="#/metrics/{{app.token}}" class="fa fa-search-plus" >Details monitoring</a>
+					|
+					<a href="#/breaker/{{app.token}}" class="fa fa-search-plus" >Details path</a>
 <!-- 					<a href="#"> -->
 <!-- 						<span class="fa fa-file-text"></span> Logs -->
 <!-- 					</a> | -->
