@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Named
@@ -43,12 +46,19 @@ public class MetricsTimerService {
 
 	@Transactional
 	public void createMetricsTimer(MessageMetrics mm) {
-		MetricsTimer mt = new MetricsTimer();
-		mt.setDateIncoming(mm.getDateIncoming());
-		mt.setPathClassMethodName(mm.getPathClassMethodName());
-		mt.setTimeExec(mm.getTimeExec());;
-		mt.setToken(mm.getToken());
-		metricsTimerDao.save(mt);
+		try {
+			MetricsTimer mt = new MetricsTimer();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy:hh-mm-ss");
+			Date date = new Date();
+			mt.setDateIncoming(sdf.parse(mm.getDateIncoming()));
+			mt.setPathClassMethodName(mm.getPathClassMethodName());
+			mt.setTimeExec(mm.getTimeExec());
+			;
+			mt.setToken(mm.getToken());
+			metricsTimerDao.save(mt);
+		}catch (ParseException e){
+			LOG.error(" Impossible save metrics ",e);
+		}
 	}
 
 }
