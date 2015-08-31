@@ -112,11 +112,7 @@
 			<dependency>
 				<groupId>com.highway2urhell</groupId>
 				<artifactId>h2hell-core</artifactId>
-<<<<<<< HEAD
-				<version>1.0.2-SNAPSHOT</version>
-=======
 				<version>${highway2urhell.version}</version>
->>>>>>> 47d70c37bcf123fb752abb7d62489ba75f94d6b4
 			</dependency>
 			<!-- ~~~~~~~~~~~ -->
 			<!-- PERSISTENCE -->
