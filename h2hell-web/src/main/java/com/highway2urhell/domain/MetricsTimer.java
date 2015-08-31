@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
+
 @Entity
 public class MetricsTimer implements IdentifiableEntity<String>{
 
@@ -17,7 +19,7 @@ public class MetricsTimer implements IdentifiableEntity<String>{
 	private String pathClassMethodName;
 	@NotNull
 	private String token;
-	private String dateIncoming;
+	private Date dateIncoming;
 	private Long timeExec;
 	public String getId() {
 		return id;
@@ -37,10 +39,10 @@ public class MetricsTimer implements IdentifiableEntity<String>{
 	public void setToken(String token) {
 		this.token = token;
 	}
-	public String getDateIncoming() {
+	public Date getDateIncoming() {
 		return dateIncoming;
 	}
-	public void setDateIncoming(String dateIncoming) {
+	public void setDateIncoming(Date dateIncoming) {
 		this.dateIncoming = dateIncoming;
 	}
 	public Long getTimeExec() {

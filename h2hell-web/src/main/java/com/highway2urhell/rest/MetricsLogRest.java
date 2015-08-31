@@ -37,4 +37,6 @@ public class MetricsLogRest {
         List<MetricsTimer> metrics = metricsTimerDao.findByToken(token);
         return Response.status(Response.Status.ACCEPTED).entity(metrics).build();
     }
+
+
 }
