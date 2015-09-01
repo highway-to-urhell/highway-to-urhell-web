@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 public interface MetricsTimerDao extends JpaRepository<MetricsTimer, String> {
@@ -18,6 +19,12 @@ public interface MetricsTimerDao extends JpaRepository<MetricsTimer, String> {
 	Long findAverageFromPathClassMethodNameAndToken(
 			@Param("pathClassMethodName") String pathClassMethodName,
 			@Param("token") String token);
+
+	@Transactional(readOnly = true)
+	@Query("from MetricsTimer mt where mt.dateIncoming between (:startDate) and (:endDate) AND mt.token=(:token)")
+	List<MetricsTimer> findMetricsBetweenDate(@Param("startDate") Date startDate,
+											  @Param("endDate") Date endDate,
+											  @Param("token") String token);
 
 
 }

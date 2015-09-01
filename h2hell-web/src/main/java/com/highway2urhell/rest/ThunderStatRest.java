@@ -1,6 +1,8 @@
 package com.highway2urhell.rest;
 
+import com.highway2urhell.dao.ThunderStatDao;
 import com.highway2urhell.domain.ThunderApp;
+import com.highway2urhell.domain.ThunderStat;
 import com.highway2urhell.rest.domain.MessageStat;
 import com.highway2urhell.service.ThunderAppService;
 import com.highway2urhell.service.ThunderStatService;
@@ -18,6 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import java.util.List;
 
 @Named
 @Path("/ThunderStat")
@@ -29,6 +32,8 @@ public class ThunderStatRest {
 	private ThunderStatService thunderStatService;
 	@Inject
 	private ThunderAppService thunderAppService;
+	@Inject
+	private ThunderStatDao thunderStatDao;
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -49,10 +54,19 @@ public class ThunderStatRest {
 	@ApiOperation("Update ThunderStat false positive")
 	@Path("/updateThunderStatFalsePositive/{id}/{status}")
 	public Response updateThunderStatFalsePositive(@PathParam("id") String id,@PathParam("status") String status) {
-		thunderStatService.updateThunderStatFalsePositive(id,status);
+		thunderStatService.updateThunderStatFalsePositive(id, status);
 		return Response.status(Status.ACCEPTED).build();
 	}
-	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation("findBytoken")
+	@Path("/findByToken/{token}")
+	public Response updateThunderStatFalsePositive(@PathParam("token") String token) {
+		List<ThunderStat> res = thunderStatDao.findByToken(token);
+		return Response.status(Status.ACCEPTED).entity(res).build();
+	}
+
+
 	
 
 		

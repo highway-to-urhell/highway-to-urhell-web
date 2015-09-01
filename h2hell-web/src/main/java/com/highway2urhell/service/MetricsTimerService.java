@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +43,20 @@ public class MetricsTimerService {
 		}
 	}
 
+
+
+	@Transactional
+	public List<MetricsTimer> findMetricsByDate(String token){
+		Date dateEnd = new Date();
+		Date dateStart = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(dateStart);
+		cal.add(Calendar.SECOND,-30);
+		dateStart = cal.getTime();
+		List<MetricsTimer> res = metricsTimerDao.findMetricsBetweenDate(dateStart,dateEnd,token);
+		LOG.info(" findmetrics token "+token+" for date "+dateStart + " to "+dateEnd +" size "+res.size());
+		return res;
+	}
 
 
 	@Transactional

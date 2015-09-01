@@ -17,6 +17,8 @@ var ThunderHomeReferenceController = function($scope, $routeParams, $http) {
 		$scope.numberEntriesPoint=msg.numberEntriesPoint;
 	});
 
+
+
 	$("#menu li").removeClass("active");
 	$("#menu_home").addClass("active");
 };
@@ -57,7 +59,7 @@ function draw_Appz(apps) {
 		yAxis : {
 			min : 0,
 			title : {
-				text : 'PPPP',
+				text : 'Entry Points',
 				align : 'high'
 			},
 			labels : {
@@ -138,3 +140,5 @@ function draw_Type(apps) {
 		} ]
 	});
 }
+
+

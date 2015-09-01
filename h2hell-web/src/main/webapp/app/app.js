@@ -22,6 +22,10 @@ App.config(['$routeProvider', function ($routeProvider) {
         templateUrl: 'app/views/metrics.html',
         controller: 'MetricsController'
     });
+    $routeProvider.when('/metricsView/:token', {
+        templateUrl: 'app/views/metricsview.html',
+        controller: 'MetricsViewController'
+    });
     $routeProvider.when('/adminh2h', {
         templateUrl: 'app/views/adminh2h.html',
         controller: 'ThunderAdminController'

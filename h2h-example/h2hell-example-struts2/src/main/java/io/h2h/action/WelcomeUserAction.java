@@ -23,14 +23,14 @@ public class WelcomeUserAction {
 		int cal = (int) (Math.random() * range) + 0;
 		if (cal%2 == 0){
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(cal*1000);
 			} catch (InterruptedException e) {
 				log.error("InterruptedException "+e);
 			}
-			log.error(" Modulo 2 ");
+			log.error(" Modulo 2 "+cal);
 			return "SUCCESS";
 		}else{
-			log.error(" No Module 2 ");
+			log.error(" No Module 2 "+cal);
 			return "SUCCESS";
 		}
 	
