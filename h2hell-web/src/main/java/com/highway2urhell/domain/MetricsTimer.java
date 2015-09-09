@@ -1,30 +1,31 @@
 package com.highway2urhell.domain;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-public class MetricsTimer implements IdentifiableEntity<String>{
+public class MetricsTimer implements IdentifiableEntity<Integer>{
 
 	@Id
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
-	private String id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private Integer id;
 	@NotNull
 	private String pathClassMethodName;
 	@NotNull
 	private String token;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private Date dateIncoming;
+
 	private Long timeExec;
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getPathClassMethodName() {
@@ -51,6 +52,8 @@ public class MetricsTimer implements IdentifiableEntity<String>{
 	public void setTimeExec(Long timeExec) {
 		this.timeExec = timeExec;
 	}
-	
-	
+
+
+
+
 }

@@ -2,6 +2,7 @@ package com.highway2urhell.rest;
 
 import com.highway2urhell.dao.MetricsTimerDao;
 import com.highway2urhell.domain.MetricsTimer;
+import com.highway2urhell.rest.domain.MessageMetricsData;
 import com.highway2urhell.service.MetricsTimerService;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -38,11 +39,21 @@ public class MetricsLogRest {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation("Find Init Metrics Log by Token")
+    @Path("/findMetricsInit/{token}")
+    public Response findMetricsInit(@PathParam("token") String token) {
+        LOG.info("Call findMetricsInit ");
+        MessageMetricsData metrics = metricsTimerService.findMetricsInit(token);
+        return Response.status(Response.Status.ACCEPTED).entity(metrics).build();
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation("Find Metrics Log by Date")
-    @Path("/findMetricsByDate/{token}")
-    public Response findMetricsByDate(@PathParam("token") String token) {
-        LOG.info("Call findMetricsByDate ");
-        List<MetricsTimer> metrics = metricsTimerService.findMetricsByDate(token);
+    @Path("/findMetricsFromLastInc/{token}/{lastInc}")
+    public Response findMetricsFromLastInc(@PathParam("token") String token,@PathParam("lastInc") Integer lastInc) {
+        LOG.info("Call findMetricsFromLastInc ");
+        MessageMetricsData metrics = metricsTimerService.findMetricsFromlastInc(token, lastInc);
         return Response.status(Response.Status.ACCEPTED).entity(metrics).build();
     }
 

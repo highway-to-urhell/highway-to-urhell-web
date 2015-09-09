@@ -6,24 +6,25 @@
  */
 var MetricsViewController = function($scope, $routeParams, $http) {
     drawDynamic();
-    dynamicLoadData( $http,$routeParams)
+    $http.post('api/MetricsLog/findMetricsInit/' + $routeParams.token).success(function (messageMetricsData) {
+        dynamicLoadData(messageMetricsData, $http, $routeParams,$scope);
+    });
+}
 
-};
 
-
-function dynamicLoadData( $http,$routeParams){
+function dynamicLoadData(messageMetricsData, $http,$routeParams,$scope){
+    $scope.rc = messageMetricsData.lastInc;
     setInterval(function () {
             var chart = $('#dynamic').highcharts();
-
-            $http.post('api/MetricsLog/findMetricsByDate/'+$routeParams.token).success(function(resList) {
-                console.log('size reslist '+resList.length);
-                for(var i = 0; i<resList.length; i++){
-                    var x = resList[i].dateIncoming;
-                    var y = resList[i].timeExec;
-                    var cm = resList[i].pathClassMethodName;
+            $http.post('api/MetricsLog/findMetricsFromLastInc/'+ $routeParams.token+'/'+$scope.rc).success(function(messageMetricsDataResult) {
+                for(var i = 0; i<messageMetricsDataResult.listMetrics.length; i++){
+                    var x = messageMetricsDataResult.listMetrics[i].dateIncoming;
+                    var y = messageMetricsDataResult.listMetrics[i].timeExec;
+                    var cm = messageMetricsDataResult.listMetrics[i].pathClassMethodName;
                     console.log('cm '+cm +' add x : '+x +' y '+y);
                     chart.series[0].addPoint({x : x ,y : y, total : cm}, true, false);
                 }
+                $scope.rc=messageMetricsDataResult.lastInc;
             });
         }
         , 5000);
