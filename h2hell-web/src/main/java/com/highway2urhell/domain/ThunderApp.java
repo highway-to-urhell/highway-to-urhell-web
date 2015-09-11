@@ -30,6 +30,16 @@ public class ThunderApp {
 	private String versionApp;
 	@Transient
 	private Integer numberEntryPoints;
+	private Boolean analysis = false;
+
+	public Boolean getAnalysis() {
+		return analysis;
+	}
+
+	public void setAnalysis(Boolean analysis) {
+		this.analysis = analysis;
+	}
+
 
 	public String getTypeAppz() {
 		return typeAppz;

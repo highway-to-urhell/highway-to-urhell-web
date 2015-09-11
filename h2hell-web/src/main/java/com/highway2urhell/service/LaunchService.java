@@ -49,6 +49,8 @@ public class LaunchService {
 		try {
 			responseEntity = restTemplate
 					.postForObject(url, null, String.class);
+			th.setAnalysis(true);
+			thunderAppDao.save(th);
 			
 		} catch (RestClientException r) {
 			responseEntity = r.getMessage();

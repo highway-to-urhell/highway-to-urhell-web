@@ -1,11 +1,14 @@
 
 <div id="main-wrapper">
     <h2>Streaming performance</h2>
-    (refresh 30 seconds)<br/>
+    (Default refresh 20 seconds)<br/>
     You must launch the analysis phase before<br/>
-
-
+    <a class="btn" href="" ng-click="launchAnalysis(th.token)"  style="font-size:18px">
+        <i class="fa fa-eye"></i> Launch analysis</a>
 </div>
+<div class="alert alert-danger"
+     style="width: 800px; margin-left: 0px; margin-top: 10px;"
+     ng-show="messageConfig !=null">{{messageConfig}}</div>
 
 <div class="col-lg-10 col-md-10">
     <div id="dynamic"></div>

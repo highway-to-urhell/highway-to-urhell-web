@@ -20,6 +20,24 @@ public class MetricsTimer implements IdentifiableEntity<Integer>{
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private Date dateIncoming;
+	private Double cpuLoadSystem;
+	private Double cpuLoadProcess;
+
+	public Double getCpuLoadSystem() {
+		return cpuLoadSystem;
+	}
+
+	public void setCpuLoadSystem(Double cpuLoadSystem) {
+		this.cpuLoadSystem = cpuLoadSystem;
+	}
+
+	public Double getCpuLoadProcess() {
+		return cpuLoadProcess;
+	}
+
+	public void setCpuLoadProcess(Double cpuLoadProcess) {
+		this.cpuLoadProcess = cpuLoadProcess;
+	}
 
 	private Long timeExec;
 	public Integer getId() {

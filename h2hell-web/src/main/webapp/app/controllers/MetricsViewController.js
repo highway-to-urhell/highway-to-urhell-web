@@ -6,9 +6,23 @@
  */
 var MetricsViewController = function($scope, $routeParams, $http) {
     drawDynamic();
-    $http.post('api/MetricsLog/findMetricsInit/' + $routeParams.token).success(function (messageMetricsData) {
-        dynamicLoadData(messageMetricsData, $http, $routeParams,$scope);
+    $http.post('api/ThunderApp/findThunderAppByToken/' + $routeParams.token).success(function (thResult) {
+            $scope.th = thResult;
+            $http.post('api/MetricsLog/findMetricsInit/' + $routeParams.token).success(function (messageMetricsData) {
+                dynamicLoadData(messageMetricsData, $http, $routeParams, $scope);
+            });
     });
+    $scope.launchAnalysis = function(token) {
+        if($scope.th.analysis){
+            $scope.messageConfig = 'Analysis Running is already active ! ';
+        }else {
+            $scope.messageConfig = 'Analysis Running for application ';
+            $http.post('api/ThunderApp/launchAnalysis/' + token).success(function (message) {
+                $scope.messageConfig = message;
+            });
+        }
+    };
+
 }
 
 
@@ -20,14 +34,16 @@ function dynamicLoadData(messageMetricsData, $http,$routeParams,$scope){
                 for(var i = 0; i<messageMetricsDataResult.listMetrics.length; i++){
                     var x = messageMetricsDataResult.listMetrics[i].dateIncoming;
                     var y = messageMetricsDataResult.listMetrics[i].timeExec;
-                    var cm = messageMetricsDataResult.listMetrics[i].pathClassMethodName;
+                    var cm = messageMetricsDataResult.listMetrics[i].pathClassMethodName+'<br/>'+
+                        'Proc:'+messageMetricsDataResult.listMetrics[i].cpuLoadProcess+'%'+
+                        'Sys:'+messageMetricsDataResult.listMetrics[i].cpuLoadSystem+'%';
                     console.log('cm '+cm +' add x : '+x +' y '+y);
                     chart.series[0].addPoint({x : x ,y : y, total : cm}, true, false);
                 }
                 $scope.rc=messageMetricsDataResult.lastInc;
             });
         }
-        , 5000);
+        , 20000);
 }
 
 

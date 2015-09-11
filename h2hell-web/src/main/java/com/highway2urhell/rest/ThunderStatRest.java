@@ -44,7 +44,7 @@ public class ThunderStatRest {
 		MessageStat ms = thunderStatService.analysisStat(token);
 		//TODO dirty clean this
 		ThunderApp app = thunderAppService.findAppByToken(token);
-		
+		ms.setAnalysis(app.getAnalysis());
 		ms.setAppName(app.getNameApp());
 		return Response.status(Status.ACCEPTED).entity(ms).build();
 	}

@@ -85,6 +85,8 @@ public class MetricsTimerService {
 			mt.setPathClassMethodName(mm.getPathClassMethodName());
 			mt.setTimeExec(mm.getTimeExec());
 			mt.setToken(mm.getToken());
+			mt.setCpuLoadProcess(mm.getCpuLoadProcess());
+			mt.setCpuLoadSystem(mm.getCpuLoadSystem());
 			metricsTimerDao.save(mt);
 		}catch (ParseException e){
 			LOG.error(" Impossible save metrics ",e);

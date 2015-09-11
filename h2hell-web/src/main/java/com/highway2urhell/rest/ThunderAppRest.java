@@ -35,7 +35,18 @@ public class ThunderAppRest {
 	private LaunchService launchService;
 	@Inject
 	private ThunderStatService thunderStatService;
-	
+
+
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation("Find th")
+	@Path("/findThunderAppByToken/{token}")
+	public Response findThunderAppByToken(@PathParam("token") String token) {
+		LOG.info("Call findThunderAppByToken ");
+		ThunderApp th = thunderAppService.findAppByToken(token);
+		return Response.status(Status.ACCEPTED).entity(th).build();
+	}
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation("Find all Thunder App")

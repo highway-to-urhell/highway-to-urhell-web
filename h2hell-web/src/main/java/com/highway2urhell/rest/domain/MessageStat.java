@@ -12,6 +12,15 @@ public class MessageStat {
 	private Integer totalFalsePositive;
 	private Integer totalNoTest;
 	private Integer totalStat;
+	private Boolean analysis =false;
+
+	public Boolean getAnalysis() {
+		return analysis;
+	}
+
+	public void setAnalysis(Boolean analysis) {
+		this.analysis = analysis;
+	}
 
 	public String getToken() {
 		return token;
