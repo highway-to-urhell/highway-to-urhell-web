@@ -27,8 +27,18 @@ var ThunderStatController = function($scope, $routeParams, $http) {
 		if($scope.ms.analysis){
 			$scope.messageConfig = 'Analysis Running is already active ! ';
 		}else {
+			console.log('gni');
 			$scope.messageConfig = 'Analysis Running for application ';
-			$http.post('api/ThunderApp/launchAnalysis/' + token).success(function (message) {
+			var dataFilter ={
+				'token' : token,
+				'filter': 'false',
+				'packageOnly' : 'false',
+				'classOnly' : 'false',
+				'classMethod' : 'false',
+				'listFilter' : []
+			};
+			console.log('send rq');
+			$http.post('api/ThunderApp/launchAnalysis/',dataFilter).success(function (message) {
 				$scope.messageConfig = message;
 			});
 		}

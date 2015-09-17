@@ -1,6 +1,7 @@
 package com.highway2urhell.service;
 
 import com.highway2urhell.dao.ThunderAppDao;
+import com.highway2urhell.domain.FilterEntryPath;
 import com.highway2urhell.domain.ThunderApp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,18 +38,18 @@ public class LaunchService {
 		return responseEntity;
 	}
 
-	public String launchAnalysis(String token) {
+	public String launchAnalysis(FilterEntryPath filter) {
 		RestTemplate restTemplate = new RestTemplate();
-		ThunderApp th = thunderAppDao.findByToken(token);
+		ThunderApp th = thunderAppDao.findByToken(filter.getToken());
 		if (th == null) {
-			return "No config for application with token" + token;
+			return "No config for application with token" + filter.getToken();
 		}
 		String url = th.getUrlApp() + "h2h/?launch=true";
 		String responseEntity = null;
 		LOG.info("Call app {} for launch analysis", url);
 		try {
 			responseEntity = restTemplate
-					.postForObject(url, null, String.class);
+					.postForObject(url, filter, String.class);
 			th.setAnalysis(true);
 			thunderAppDao.save(th);
 			
