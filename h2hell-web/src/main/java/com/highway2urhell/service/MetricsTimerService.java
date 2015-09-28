@@ -3,9 +3,11 @@ package com.highway2urhell.service;
 import com.highway2urhell.dao.MetricsTimerDao;
 import com.highway2urhell.domain.MessageMetrics;
 import com.highway2urhell.domain.MetricsTimer;
+import com.highway2urhell.rest.domain.MessageFilterMetricsModel;
 import com.highway2urhell.rest.domain.MessageMetricsData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -83,14 +85,22 @@ public class MetricsTimerService {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 			mt.setDateIncoming(sdf.parse(mm.getDateIncoming()));
 			mt.setPathClassMethodName(mm.getPathClassMethodName());
-			mt.setTimeExec(mm.getTimeExec());
+			mt.setTimeExec(Integer.valueOf(mm.getTimeExec()));
 			mt.setToken(mm.getToken());
 			mt.setCpuLoadProcess(mm.getCpuLoadProcess());
 			mt.setCpuLoadSystem(mm.getCpuLoadSystem());
 			metricsTimerDao.save(mt);
 		}catch (ParseException e){
-			LOG.error(" Impossible save metrics ",e);
+			LOG.error(" Impossible save metrics ", e);
 		}
+	}
+
+	@Transactional
+	public MessageMetricsData findMetricsWithFilter(MessageFilterMetricsModel mfm){
+		MessageMetricsData message = new MessageMetricsData();
+		message.setListMetrics(metricsTimerDao.findByFilter(mfm.getToken(),mfm.getResponseTime(), new PageRequest(0,mfm.getNbItems().intValue())));
+		message.setLastInc(null);
+		return message;
 	}
 
 }

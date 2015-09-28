@@ -39,7 +39,7 @@ public class MetricsTimer implements IdentifiableEntity<Integer>{
 		this.cpuLoadProcess = cpuLoadProcess;
 	}
 
-	private Long timeExec;
+	private Integer timeExec;
 	public Integer getId() {
 		return id;
 	}
@@ -64,10 +64,10 @@ public class MetricsTimer implements IdentifiableEntity<Integer>{
 	public void setDateIncoming(Date dateIncoming) {
 		this.dateIncoming = dateIncoming;
 	}
-	public Long getTimeExec() {
+	public Integer getTimeExec() {
 		return timeExec;
 	}
-	public void setTimeExec(Long timeExec) {
+	public void setTimeExec(Integer timeExec) {
 		this.timeExec = timeExec;
 	}
 

@@ -39,7 +39,7 @@
 		<jdbc.groupId>com.h2database</jdbc.groupId>
 		<jdbc.artifactId>h2</jdbc.artifactId>
 		<jdbc.version>1.4.178</jdbc.version>
-		<highway2urhell.version>1.0.2-SNAPSHOT</highway2urhell.version>
+		<highway2urhell.version>1.0.3-SNAPSHOT</highway2urhell.version>
 	</properties>
 
 	<developers>

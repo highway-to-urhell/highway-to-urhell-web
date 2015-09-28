@@ -1,9 +1,11 @@
 package com.highway2urhell.rest;
 
 import com.highway2urhell.dao.BreakerLogDao;
+import com.highway2urhell.dao.MetricsTimerDao;
 import com.highway2urhell.dao.ThunderAppDao;
 import com.highway2urhell.dao.ThunderStatDao;
 import com.highway2urhell.domain.BreakerLog;
+import com.highway2urhell.domain.MetricsTimer;
 import com.highway2urhell.domain.ThunderApp;
 import com.highway2urhell.domain.ThunderStat;
 import com.wordnik.swagger.annotations.Api;
@@ -37,11 +39,55 @@ public class PopulatorRest {
 	private BreakerLogDao breakerLogDao;
 	@Inject
 	private ThunderStatDao thunderStatDao;
+	@Inject
+	private MetricsTimerDao metricsTimerDao;
 
 	private ThunderApp ta0 = new ThunderApp();
 	private ThunderApp ta1 = new ThunderApp();
 	private ThunderApp ta2 = new ThunderApp();
 
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation("Create Data for performance")
+	@Path("/createdataperformance")
+	public Response createDataPerformance(){
+		String token = createAppPerf();
+		//create indicator performance
+		for (int i= 0; i< 300 ; i++){
+			createTimer(token,i);
+		}
+		return Response.status(Status.ACCEPTED).build();
+	}
+	@Transactional
+	private void createTimer(String token, int todo){
+		MetricsTimer mt = new MetricsTimer();
+		mt.setToken(token);
+		mt.setCpuLoadProcess(new Double(1));
+		mt.setCpuLoadSystem(new Double(1));
+		mt.setDateIncoming(new Date());
+		mt.setPathClassMethodName("path" + todo);
+		Random r = new Random();
+		Integer tExec = Integer.valueOf(r.nextInt(10)*1000);
+		mt.setTimeExec(tExec);
+		metricsTimerDao.save(mt);
+
+	}
+	private String createAppPerf(){
+		//create App
+		ThunderApp ta = new ThunderApp();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy:hh-mm-ss");
+		ta.setDateCreation(sdf.format(new Date()));
+		ta.setDescription("Fake Description from populator");
+		ta.setNameApp("performance");
+		ta.setPathSource("/tmp/src/java/io/42kik/");
+		String token = String.valueOf(System.currentTimeMillis());
+		ta.setToken(token);
+		ta.setUrlApp("http://localhost:9090");
+		ta.setVersionApp("1.0");
+		ta.setTypeAppz("Java");
+		thunderAppDao.save(ta);
+		return token;
+	}
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation("Launch Populator")

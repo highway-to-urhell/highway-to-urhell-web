@@ -2,6 +2,7 @@ package com.highway2urhell.rest;
 
 import com.highway2urhell.dao.MetricsTimerDao;
 import com.highway2urhell.domain.MetricsTimer;
+import com.highway2urhell.rest.domain.MessageFilterMetricsModel;
 import com.highway2urhell.rest.domain.MessageMetricsData;
 import com.highway2urhell.service.MetricsTimerService;
 import com.wordnik.swagger.annotations.Api;
@@ -57,6 +58,16 @@ public class MetricsLogRest {
         return Response.status(Response.Status.ACCEPTED).entity(metrics).build();
     }
 
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @ApiOperation("Find Metrics Log by Date")
+    @Path("/findMetrics/")
+    public Response findMetrics(MessageFilterMetricsModel filterMetricsModel) {
+        LOG.info("Call findMetrics ");
+        MessageMetricsData metrics = metricsTimerService.findMetricsWithFilter(filterMetricsModel);
+        return Response.status(Response.Status.ACCEPTED).entity(metrics).build();
+    }
 
 
 
