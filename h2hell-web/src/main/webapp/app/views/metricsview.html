@@ -17,8 +17,7 @@
 <div class="panel  panel-white">
     <div class="panel-body">
         <label style="width:200px">Minimum response time (ms)</label><input type="text" name="responseTime" ng-model="filterModel.responseTime"/><br/>
-        <label style="width:200px">Number items</label><input type="text" name="nbItems" ng-model="filterModel.nbItems"/>  <label>All items <input type="checkbox" ng-model="allItems"
-                                                                           ng-true-value="yes" ng-false-value="no" /></label><br/>
+        <label style="width:200px">Number items</label><input type="text" name="nbItems" ng-model="filterModel.nbItems"/>  <br/>
         <button ng-click="applyFilter()">Apply Filter History</button> <button ng-click="reloadDynamicData()">Reload Real Timer</button>
         <br/>
     </div>

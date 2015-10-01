@@ -43,6 +43,7 @@ var MetricsViewController = function($scope, $routeParams, $http) {
         //stop the interval
         clearInterval(internal);
         //send data
+
         $http.post('api/MetricsLog/findMetrics/',$scope.filterModel).success(function (messageMetricsDataResult) {
             var chart = $('#dynamic').highcharts();
             //remove data
@@ -71,6 +72,7 @@ function initData($scope,$routeParams){
     $scope.filterModel.token = $routeParams.token;
     $scope.filterModel.responseTime = 2000;
     $scope.filterModel.nbItems = 100;
+
 }
 
 

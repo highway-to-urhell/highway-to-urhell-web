@@ -23,7 +23,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Random;
 
 @Named
@@ -64,7 +66,10 @@ public class PopulatorRest {
 		mt.setToken(token);
 		mt.setCpuLoadProcess(new Double(1));
 		mt.setCpuLoadSystem(new Double(1));
-		mt.setDateIncoming(new Date());
+		Random rd = new Random();
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MINUTE,rd.nextInt(3));
+		mt.setDateIncoming(cal.getTime());
 		mt.setPathClassMethodName("path" + todo);
 		Random r = new Random();
 		Integer tExec = Integer.valueOf(r.nextInt(10)*1000);

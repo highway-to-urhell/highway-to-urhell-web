@@ -5,6 +5,7 @@ public class MessageFilterMetricsModel {
     private String token;
     private Integer responseTime;
     private Integer nbItems;
+    private String allItems;
 
 
     public String getToken() {
