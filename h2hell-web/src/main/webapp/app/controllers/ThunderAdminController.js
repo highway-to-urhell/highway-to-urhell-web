@@ -27,6 +27,9 @@ var ThunderAdminController = function($scope, $http) {
     $scope.messageStatus=null;
     
     $("#menu li").removeClass("active");
+    $("#menu_vizu").addClass("inactive");
+    $("#menu_performance").addClass("inactive");
+    $("#menu_rls").addClass("inactive");
+    $("#menu_configuration").addClass("inactive");
     $("#menu_settings").addClass("active");
-    
 };

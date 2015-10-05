@@ -34,6 +34,18 @@ App.config(['$routeProvider', function ($routeProvider) {
         templateUrl: 'app/views/app.html',
         controller: 'ThunderAppReferenceController'
     });
+    $routeProvider.when('/performance', {
+        templateUrl: 'app/views/performance.html',
+        controller: 'ThunderPerformanceController'
+    });
+    $routeProvider.when('/rls', {
+        templateUrl: 'app/views/rls.html',
+        controller: 'ThunderrlsController'
+    });
+    $routeProvider.when('/configuration', {
+        templateUrl: 'app/views/configuration.html',
+        controller: 'ThunderConfigurationController'
+    });
     $routeProvider.when('/home', {
         templateUrl: 'app/views/home.html',
         controller: 'ThunderHomeReferenceController'
