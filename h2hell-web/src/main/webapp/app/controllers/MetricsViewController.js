@@ -76,8 +76,6 @@ function initData($scope,$routeParams){
 }
 
 
-
-
 function dynamicLoadData(messageMetricsData, $http,$routeParams,$scope){
     $scope.rc = messageMetricsData.lastInc;
     internal = setInterval(function () {
