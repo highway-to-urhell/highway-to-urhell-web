@@ -18,6 +18,15 @@ public class BreakerLog implements IdentifiableEntity<String> {
 	@NotNull
 	private String token;
 	private String dateIncoming;
+	private String parameters;
+
+	public String getParameters() {
+		return parameters;
+	}
+
+	public void setParameters(String parameters) {
+		this.parameters = parameters;
+	}
 
 	public String getId() {
 		return id;

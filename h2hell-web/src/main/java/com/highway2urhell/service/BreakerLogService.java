@@ -1,5 +1,6 @@
 package com.highway2urhell.service;
 
+import com.google.gson.Gson;
 import com.highway2urhell.dao.BreakerLogDao;
 import com.highway2urhell.dao.ThunderAppDao;
 import com.highway2urhell.domain.BreakerLog;
@@ -26,11 +27,12 @@ public class BreakerLogService {
 
 	@Transactional
 	public void createBreakerLog(ThunderApp th, String pathClassMethodName,
-			String dateIncoming) {
+			String dateIncoming,String parameters) {
 		BreakerLog breaker = new BreakerLog();
 		breaker.setDateIncoming(dateIncoming);
 		breaker.setPathClassMethodName(pathClassMethodName);
 		breaker.setToken(th.getToken());
+		breaker.setParameters(parameters);
 		breakerLogDao.save(breaker);
 	}
 
@@ -42,17 +44,17 @@ public class BreakerLogService {
 						msg.getPathClassMethodName(), msg.getToken(),
 						msg.getDateIncoming());
 				addBreaker(msg.getPathClassMethodName(), msg.getToken(),
-						msg.getDateIncoming());
+						msg.getDateIncoming(),msg.getParameters());
 			}
 		}
 	}
 
 	private void addBreaker(String pathClassMethodName, String token,
-			String dateIncoming) {
+			String dateIncoming,String parameters) {
 		validate(pathClassMethodName, token, dateIncoming);
 		ThunderApp th = thunderAppDao.findByToken(token);
         // Add breaker log Service
-        createBreakerLog(th, pathClassMethodName, dateIncoming);
+        createBreakerLog(th, pathClassMethodName, dateIncoming,parameters);
 	}
 
 	private void validate(String pathClassMethodName, String token,

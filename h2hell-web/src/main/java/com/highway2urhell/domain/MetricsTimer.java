@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class MetricsTimer implements IdentifiableEntity<Integer>{
@@ -22,6 +23,15 @@ public class MetricsTimer implements IdentifiableEntity<Integer>{
 	private Date dateIncoming;
 	private Double cpuLoadSystem;
 	private Double cpuLoadProcess;
+	private String parameters;
+
+	public String getParameters() {
+		return parameters;
+	}
+
+	public void setParameters(String parameters) {
+		this.parameters = parameters;
+	}
 
 	public Double getCpuLoadSystem() {
 		return cpuLoadSystem;

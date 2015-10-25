@@ -1,5 +1,6 @@
 package com.highway2urhell.service;
 
+import com.google.gson.Gson;
 import com.highway2urhell.dao.MetricsTimerDao;
 import com.highway2urhell.domain.MessageMetrics;
 import com.highway2urhell.domain.MetricsTimer;
@@ -89,6 +90,7 @@ public class MetricsTimerService {
 			mt.setToken(mm.getToken());
 			mt.setCpuLoadProcess(mm.getCpuLoadProcess());
 			mt.setCpuLoadSystem(mm.getCpuLoadSystem());
+			mt.setParameters(mm.getParameters());
 			metricsTimerDao.save(mt);
 		}catch (ParseException e){
 			LOG.error(" Impossible save metrics ", e);

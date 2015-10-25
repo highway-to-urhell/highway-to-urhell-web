@@ -14,6 +14,13 @@ public class WelcomeUserAction {
 	}
 
 	public void setUsername(String username) {
+		int range = (100 - 0) + 1;
+		int cal = (int) (Math.random() * range) + 0;
+		try {
+			Thread.sleep(cal);
+		} catch (InterruptedException e) {
+			log.error("InterruptedException "+e);
+		}
 		this.username = username;
 	}
 
@@ -27,10 +34,8 @@ public class WelcomeUserAction {
 			} catch (InterruptedException e) {
 				log.error("InterruptedException "+e);
 			}
-			log.error(" Modulo 2 "+cal);
 			return "SUCCESS";
 		}else{
-			log.error(" No Module 2 "+cal);
 			return "SUCCESS";
 		}
 	

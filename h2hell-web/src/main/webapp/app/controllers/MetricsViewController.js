@@ -100,6 +100,10 @@ function dynamicLoadData(messageMetricsData, $http,$routeParams,$scope){
 }
 
 
+function call(){
+    alert('here');
+}
+
 function drawDynamic(arg){
     if(arg === 'init') {
         var tabPush = [];
@@ -160,7 +164,7 @@ function drawDynamic(arg){
             formatter: function () {
                 return '<b>' + this.total + '</b><br/>' +
                     Highcharts.dateFormat('%d-%m-%Y %H:%M:%S', this.x) + '<br/>' +
-                    Highcharts.numberFormat(this.y, 0)+'ms';
+                    Highcharts.numberFormat(this.y, 0)+'ms'+'<a class=\"btn\" ng-click=\"call()\" >';
             }
         },
         series: [{
