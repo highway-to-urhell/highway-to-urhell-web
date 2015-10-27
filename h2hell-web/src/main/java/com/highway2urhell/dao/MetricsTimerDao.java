@@ -1,35 +1,34 @@
 package com.highway2urhell.dao;
 
 import com.highway2urhell.domain.MetricsTimer;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public interface MetricsTimerDao extends JpaRepository<MetricsTimer, String> {
+public interface MetricsTimerDao extends MongoRepository<MetricsTimer, String> {
 	
 	@Transactional(readOnly = true)
 	List<MetricsTimer> findByToken(String token);
 	
 	@Transactional(readOnly = true)
-	@Query("select AVG(mt.timeExec) from MetricsTimer mt where mt.pathClassMethodName=(:pathClassMethodName) and mt.token=(:token)")
+	@Query("{'pathClassMethodName' :?0,'token':?1}")
 	Long findAverageFromPathClassMethodNameAndToken(
 			@Param("pathClassMethodName") String pathClassMethodName,
 			@Param("token") String token);
 
 
 	@Transactional(readOnly = true)
-	@Query("from MetricsTimer mt where mt.id>(:lastInc) AND mt.token=(:token)")
+	@Query("{'id' :{$gt :?0},'token':?1}")
 	List<MetricsTimer> findLastInc(@Param("token") String token,
 								   @Param("lastInc") Integer lastInc);
 
-	//triage par date de plus recent au plus vieux avec token comme key puis timeExec > responsetime puis prend les nbitems
+	//ORDER
 	@Transactional(readOnly = true)
-	@Query("from MetricsTimer mt where mt.token=(:token) AND mt.timeExec>(:responsetime) order by mt.dateIncoming DESC")
+	@Query("{'token': ?0 ,'timeExec' : {$gt :?1}} ")
 	List<MetricsTimer> findByFilter(@Param("token") String token,
 									@Param("responsetime") Integer responsetime,
 									Pageable pr);

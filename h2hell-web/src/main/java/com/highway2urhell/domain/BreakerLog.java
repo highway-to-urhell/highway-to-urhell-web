@@ -1,17 +1,10 @@
 package com.highway2urhell.domain;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-@Entity
+
 public class BreakerLog implements IdentifiableEntity<String> {
-	@Id
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+
 	private String id;
 	@NotNull
 	private String pathClassMethodName;

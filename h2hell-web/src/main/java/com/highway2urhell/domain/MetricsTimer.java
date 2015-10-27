@@ -2,23 +2,18 @@ package com.highway2urhell.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
-@Entity
+
 public class MetricsTimer implements IdentifiableEntity<Integer>{
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
 	@NotNull
 	private String pathClassMethodName;
 	@NotNull
 	private String token;
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
 	private Date dateIncoming;
 	private Double cpuLoadSystem;

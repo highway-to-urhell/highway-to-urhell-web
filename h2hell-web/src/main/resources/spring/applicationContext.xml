@@ -34,7 +34,7 @@
 	</bean>
 
 	<!-- datasource -->
-	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+	<!--<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
 		destroy-method="close" lazy-init="false">
 		<description><![CDATA[
 			Simple datasource. This is a direct access to the datasource that can be used for specific queries that need to bypass JPA functionalities.
@@ -51,6 +51,6 @@
 		<property name="defaultAutoCommit" value="false" />
 		<property name="removeAbandoned" value="true" />
 		<property name="removeAbandonedTimeout" value="60" />
-	</bean>
+	</bean>-->
 
 </beans>

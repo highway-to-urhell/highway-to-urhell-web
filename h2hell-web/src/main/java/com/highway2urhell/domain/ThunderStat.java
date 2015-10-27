@@ -1,23 +1,13 @@
 package com.highway2urhell.domain;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-@Entity
+
 public class ThunderStat implements Comparable<ThunderStat>{
-	@Id
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String id;
 	@NotNull
 	private Long count;
 	@NotNull
-	@ManyToOne
 	private ThunderApp thunderApp;
 	@NotNull
 	private String pathClassMethodName;

@@ -35,9 +35,9 @@ public class ThunderAdminService {
 	@Transactional
 	public void purgeBreakerByToken(String token) {
 		List<BreakerLog> listBreaker = breakerLogDao.findByToken(token);
-		breakerLogDao.deleteInBatch(listBreaker);
+		breakerLogDao.delete(listBreaker);
 	}
-	
+
 	@Transactional
 	public void deleteThunderAppByToken(String token) {
 		ThunderApp ta = thunderAppDao.findByToken(token);

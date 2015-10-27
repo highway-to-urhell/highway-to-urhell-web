@@ -16,14 +16,13 @@
 
 	<properties>
 		<!-- jdbc settings for h2 -->
-		<jdbc.type>h2</jdbc.type>
+	<!--	<jdbc.type>h2</jdbc.type>
 		<jdbc.driver>org.h2.Driver</jdbc.driver>
 		<jdbc.url>jdbc:h2:${project.build.directory}/h2/h2h;MVCC=TRUE;FILE_LOCK=NO</jdbc.url>
 		<jdbc.user>h2h</jdbc.user>
 		<jdbc.password>password</jdbc.password>
-		<!-- hibernate, see by src/main/resource/thunder.properties -->
 		<hibernate.show.sql>true</hibernate.show.sql>
-		<hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
+		<hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>-->
 
 		<!-- ~~~~~~ -->
 		<!-- System -->
@@ -40,7 +39,7 @@
 		<!-- ~~~~~~~~~~~ -->
 		<!-- PERSISTENCE -->
 		<!-- ~~~~~~~~~~~ -->
-		<dependency>
+	<!--	<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
 			<artifactId>hibernate-jpa-2.1-api</artifactId>
 		</dependency>
@@ -70,10 +69,9 @@
 			<artifactId>tomcat-jdbc</artifactId>
 		</dependency>
 		<dependency>
-			<!-- jdbc driver depends on the database profile used -->
 			<groupId>${jdbc.groupId}</groupId>
 			<artifactId>${jdbc.artifactId}</artifactId>
-		</dependency>
+		</dependency>-->
 		<!-- ~~~~~~~~~~ -->
 		<!-- VALIDATION -->
 		<!-- ~~~~~~~~~~ -->
@@ -181,10 +179,15 @@
 		<!-- ~~~~ -->
 		<!-- SPRING DATA -->
 		<!-- ~~~~ -->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
+		</dependency>-->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
 		</dependency>
+
 
 		<!-- ~~~~~~~~~~~~~~ -->
 		<!-- SPRING SECURITY -->

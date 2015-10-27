@@ -1,18 +1,11 @@
 package com.highway2urhell.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Entity
-public class ThunderApp {
-	@Id
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+
+public class ThunderApp implements IdentifiableEntity<String>{
 	private String id;
 	@NotNull
 	private String nameApp;
@@ -24,11 +17,8 @@ public class ThunderApp {
 	private String description;
 	private String pathSource;
 	private String typeAppz;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "thunderApp", cascade = CascadeType.REMOVE)
-	@JsonIgnore
 	private Set<ThunderStat> thunderStatSet = new LinkedHashSet<ThunderStat>();
 	private String versionApp;
-	@Transient
 	private Integer numberEntryPoints;
 	private Boolean analysis = false;
 
