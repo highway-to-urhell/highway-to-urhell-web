@@ -1,10 +1,13 @@
 package com.highway2urhell.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.validation.constraints.NotNull;
 
-
-public class BreakerLog implements IdentifiableEntity<String> {
-
+@Document(collection = "breaker")
+public class BreakerLog  {
+	@Id
 	private String id;
 	@NotNull
 	private String pathClassMethodName;

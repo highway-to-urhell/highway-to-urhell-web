@@ -1,13 +1,15 @@
 package com.highway2urhell.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-
-public class MetricsTimer implements IdentifiableEntity<Integer>{
-
+@Document(collection = "metrics")
+public class MetricsTimer {
+	@Id
 	private Integer id;
 	@NotNull
 	private String pathClassMethodName;

@@ -4,6 +4,7 @@ import javax.validation.constraints.NotNull;
 
 
 public class ThunderStat implements Comparable<ThunderStat>{
+	
 	private String id;
 	@NotNull
 	private Long count;

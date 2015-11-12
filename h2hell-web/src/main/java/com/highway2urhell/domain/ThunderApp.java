@@ -1,11 +1,15 @@
 package com.highway2urhell.domain;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.validation.constraints.NotNull;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-
-public class ThunderApp implements IdentifiableEntity<String>{
+@Document(collection = "ThunderApp")
+public class ThunderApp {
+	@Id
 	private String id;
 	@NotNull
 	private String nameApp;
