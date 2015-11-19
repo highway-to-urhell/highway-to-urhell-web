@@ -2,6 +2,8 @@ package com.highway2urhell.rest;
 
 import com.highway2urhell.dao.BreakerLogDao;
 import com.highway2urhell.domain.BreakerLog;
+import com.highway2urhell.rest.domain.MessageBreakerLog;
+import com.highway2urhell.service.BreakerLogService;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -13,6 +15,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.List;
 
 @Named
@@ -24,6 +28,8 @@ public class BreakerLogRest {
 
 	@Inject
 	private BreakerLogDao breakerLogDao;
+	@Inject
+	private BreakerLogService breakerLogService;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -41,8 +47,32 @@ public class BreakerLogRest {
 	@Path("/findBreakerWithToken/{token}")
 	public Response findBreakerWithToken(@PathParam("token") String token) {
 		LOG.info("Call findBreakerWithToken ");
-		List<BreakerLog> breaker = breakerLogDao.findByToken(token);
+		List<MessageBreakerLog> breaker = breakerLogService.findByToken(token);
 		return Response.status(Status.ACCEPTED).entity(breaker).build();
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	@ApiOperation("sendCsv")
+	@Path("/sendCsv/{token}")
+	public Response sendCsv(@PathParam("token") String token) {
+		LOG.info("Call sendCsv ");
+		String fileName = "fileExport"+System.currentTimeMillis()+".csv";
+		breakerLogService.extractBreakerWithTokenToCsv(fileName,token);
+		File file = new File(fileName);
+		return Response.ok(file, MediaType.APPLICATION_OCTET_STREAM)
+				.header("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"") //optional
+				.build();
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation("sendJson")
+	@Path("/sendJson/{token}")
+	public Response sendJson(@PathParam("token") String token) {
+		LOG.info("Call sendJson ");
+		String csv = breakerLogService.extractBreakerWithTokenToJson(token);
+		return Response.status(Status.ACCEPTED).entity(csv).build();
 	}
 
 }

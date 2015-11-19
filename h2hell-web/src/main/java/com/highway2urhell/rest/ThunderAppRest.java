@@ -2,6 +2,8 @@ package com.highway2urhell.rest;
 
 import com.highway2urhell.domain.FilterEntryPath;
 import com.highway2urhell.domain.ThunderApp;
+import com.highway2urhell.domain.ThunderStat;
+import com.highway2urhell.rest.domain.DataAnalysis;
 import com.highway2urhell.rest.domain.MessageGlobalStat;
 import com.highway2urhell.rest.domain.MessageStat;
 import com.highway2urhell.rest.domain.MessageType;
@@ -99,9 +101,9 @@ public class ThunderAppRest {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@ApiOperation("Launch analysis")
 	@Path("/launchAnalysis")
-	public Response launchAnalysis(FilterEntryPath filter) {
+	public Response launchAnalysis(DataAnalysis da) {
 		LOG.info("Call launchAnalysis ");
-		String msg = launchService.launchAnalysis(filter);
+		String msg = launchService.launchAnalysis(da);
 		return Response.status(Status.ACCEPTED).entity(msg).build();
 	}
 

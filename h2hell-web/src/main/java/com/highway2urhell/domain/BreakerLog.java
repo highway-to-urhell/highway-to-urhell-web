@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -18,6 +19,7 @@ public class BreakerLog implements IdentifiableEntity<String> {
 	@NotNull
 	private String token;
 	private String dateIncoming;
+	@Lob
 	private String parameters;
 
 	public String getParameters() {

@@ -34,6 +34,7 @@ public class MetricsTimerService {
 
 
 	public void addListPerformance(List<MessageMetrics> listPerf) {
+		LOG.error("size listPerf !! "+listPerf.size());
 		if (listPerf != null && !listPerf.isEmpty()) {
 			for (MessageMetrics msg : listPerf) {
 				LOG.info(

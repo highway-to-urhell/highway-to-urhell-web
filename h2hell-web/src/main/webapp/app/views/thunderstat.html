@@ -54,8 +54,10 @@
 				<a class="btn" href="" ng-click="findAllPaths(ms.token)"  style="font-size:18px">
 					<i class="fa fa-fire"></i> Find all Paths</a>
 				<br />
-				<a class="btn" href="" ng-click="launchAnalysis(ms.token)"  style="font-size:18px">
-				  <i class="fa fa-eye"></i> Launch analysis</a>
+				<a class="btn" href="#/launchAnalysis/{{ms.token}}" ng-click=""  style="font-size:18px">
+					<i class="fa fa-fire"></i> Launch analysis</a>
+				<br />
+
 			</div>
 		</div>
 	</div>
@@ -73,13 +75,14 @@
 				<th style="text-align: center;">Http Method</th>
 				<th style="text-align: center;">Count</th>
 				<th style="text-align: center;">Average Time (ms)</th>
+				<th style="text-align: center;">Tracked</th>
 				<th style="text-align: center;">False Positive</th>
 				<th style="text-align: center;">Change Status</th>
 			</tr>
 		</thead>
 		<tbody class="searchable">
 			<tr ng-repeat="stat in ms.listThunderStat"
-				ng-style="set_color(stat.falsePositive,stat.count)">
+				ng-style="set_color(stat.falsePositive,stat.count,stat.drawAnalysis)">
 				<td style="text-align: center;"><a
 					href="#/thundersource/{{ms.token}}/{{stat.pathClassMethodName}}"
 					target="_blank">{{stat.pathClassMethodName}}</a></td>
@@ -89,22 +92,27 @@
 				<td style="text-align: center;">{{stat.count}}</td>
 				<td style="text-align: center;">{{stat.averageTime}}</td>
 				<td style="text-align: center;">
-				
-				<div ng-show="stat.falsePositive">yes</div>
+					<div ng-show="!stat.drawAnalysis">
+						Not Analysis
+					</div>
+					<div ng-show="stat.drawAnalysis && !stat.checkLaunch">
+						Not Tracked
+					</div>
+					<div ng-show="stat.drawAnalysis && stat.checkLaunch">
+						Tracked
+					</div>
+				</td>
+				<td style="text-align: center;"><div ng-show="stat.falsePositive">yes</div></td>
 				<td style="text-align: center;">
-				<div ng-show="stat.falsePositive">
-					<a class="fa fa-exclamation-triangle"
-						ng-click="updateThunderStatFalsePositive(stat.id,true,stat.pathClassMethodName)"> restore as positive</a>
-				</div>
-				
-				
-				
-				<div ng-show="!stat.falsePositive">
-					<a class="fa fa-trash-o"
-						ng-click="updateThunderStatFalsePositive(stat.id,fasle,stat.pathClassMethodName)"> set as false positive</a>
-				</div>
-				
-				</td>		
+					<div ng-show="stat.falsePositive">
+						<a class="fa fa-exclamation-triangle"
+							ng-click="updateThunderStatFalsePositive(stat.id,true,stat.pathClassMethodName)"> restore as positive</a>
+					</div>
+					<div ng-show="!stat.falsePositive">
+						<a class="fa fa-trash-o"
+							ng-click="updateThunderStatFalsePositive(stat.id,fasle,stat.pathClassMethodName)"> set as false positive</a>
+					</div>
+			    </td>
 			</tr>
 		</tbody>
 	</table>

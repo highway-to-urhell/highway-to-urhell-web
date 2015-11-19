@@ -23,6 +23,7 @@ public class MetricsTimer implements IdentifiableEntity<Integer>{
 	private Date dateIncoming;
 	private Double cpuLoadSystem;
 	private Double cpuLoadProcess;
+	@Lob
 	private String parameters;
 
 	public String getParameters() {

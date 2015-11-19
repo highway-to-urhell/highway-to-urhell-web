@@ -27,6 +27,25 @@ public class ThunderStat implements Comparable<ThunderStat>{
 	private String httpmethod;
 	private Boolean audit;
 	private Long averageTime;
+	private Boolean checkLaunch = false;
+
+	public Boolean getDrawAnalysis() {
+		return drawAnalysis;
+	}
+
+	public void setDrawAnalysis(Boolean drawAnalysis) {
+		this.drawAnalysis = drawAnalysis;
+	}
+
+	private Boolean drawAnalysis = false;
+
+	public Boolean getCheckLaunch() {
+		return checkLaunch;
+	}
+
+	public void setCheckLaunch(Boolean checkLaunch) {
+		this.checkLaunch = checkLaunch;
+	}
 
 	public Boolean getAudit() {
 		return audit;

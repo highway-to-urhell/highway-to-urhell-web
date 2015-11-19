@@ -9,12 +9,12 @@ var internal ;
 var MetricsViewController = function($scope, $routeParams, $http) {
     initData($scope,$routeParams);
     drawDynamic('init');
-    $http.post('api/ThunderApp/findThunderAppByToken/' + $routeParams.token).success(function (thResult) {
+    /*$http.post('api/ThunderApp/findThunderAppByToken/' + $routeParams.token).success(function (thResult) {
             $scope.th = thResult;
             $http.post('api/MetricsLog/findMetricsInit/' + $routeParams.token).success(function (messageMetricsData) {
                 dynamicLoadData(messageMetricsData, $http, $routeParams, $scope);
             });
-    });
+    });*/
     $scope.launchAnalysis = function(token) {
         if($scope.th.analysis){
             $scope.messageConfig = 'Analysis Running is already active ! ';

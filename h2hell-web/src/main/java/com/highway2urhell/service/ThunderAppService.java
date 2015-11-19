@@ -4,6 +4,7 @@ import com.highway2urhell.dao.ThunderAppDao;
 import com.highway2urhell.domain.EntryPathData;
 import com.highway2urhell.domain.H2hConfig;
 import com.highway2urhell.domain.ThunderApp;
+import com.highway2urhell.domain.ThunderStat;
 import com.highway2urhell.exception.exception.NotExistThunderAppException;
 import com.highway2urhell.exception.exception.TokenException;
 import com.highway2urhell.rest.domain.MessageGlobalStat;
@@ -22,6 +23,7 @@ import java.util.*;
 public class ThunderAppService {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(ThunderAppService.class);
+
 	@Inject
 	private ThunderAppDao thunderAppDao;
 	@Inject
@@ -109,5 +111,4 @@ public class ThunderAppService {
 		}
 		return ta;
 	}
-
 }

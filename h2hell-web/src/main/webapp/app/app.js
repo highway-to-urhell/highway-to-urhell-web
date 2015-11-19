@@ -58,6 +58,10 @@ App.config(['$routeProvider', function ($routeProvider) {
         templateUrl: 'app/views/plugins.html',
         controller: 'PluginsController'
     });
+    $routeProvider.when('/launchAnalysis/:token', {
+        templateUrl: 'app/views/launchanalysis.html',
+        controller: 'LaunchAnalysisController'
+    })
     $routeProvider.otherwise({redirectTo: '/home'});
 }]);
 

@@ -67,6 +67,22 @@ public class ThunderStatRest {
 	}
 
 
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation("Find ThunderStat By Token")
+	@Path("/findThunderStatByTokenAndFilter/{token}")
+	public Response findThunderStatByTokenAndFilter(@PathParam("token") String token) {
+		LOG.info("Call findThunderStatByTokenAndFilter ");
+		MessageStat ms = thunderStatService.analysisStat(token);
+		//filter
+		thunderStatService.filterFramework(ms.getListThunderStat());
+		//TODO dirty clean this
+		ThunderApp app = thunderAppService.findAppByToken(token);
+		ms.setAnalysis(app.getAnalysis());
+		ms.setAppName(app.getNameApp());
+		return Response.status(Status.ACCEPTED).entity(ms).build();
+	}
+
 	
 
 		

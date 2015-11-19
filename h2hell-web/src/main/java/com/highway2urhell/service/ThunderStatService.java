@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,14 +23,32 @@ import java.util.List;
 public class ThunderStatService {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(ThunderStatService.class);
-
+	private static List<String> listFrameworkNoAnalysis = new ArrayList<String>(){{
+		add("org.apache.struts");
+		add("com.google.gwt");
+		add("org.springframework");
+		add("javax.servlet");
+		add("com.sun.faces");
+		add("org.apache.activemq");
+		add("org.apache.struts2");
+		add("org.glassfish.jersey.server");
+		add("portAnalysis");
+		add("org.springframework.web.struts");
+		add("com.highway2urhell.filter");
+		add("com.highway2urhell.servlet");
+	}};
 	@Inject
 	private ThunderStatDao thunderStatDao;
 	@Inject
 	private BreakerLogDao breakerLogDao;
 	@Inject
 	private MetricsTimerDao metricsTimerDao;
-	
+
+	@Transactional
+	public void updateListStat(List<ThunderStat> listTs){
+		thunderStatDao.save(listTs);
+	}
+
 	public MessageStat analysisStat(String token){
 		MessageStat ms = new MessageStat();
 		LOG.info("analysis for token {}",token);
@@ -95,5 +114,27 @@ public class ThunderStatService {
 		ts.setFalsePositive(res);
 		thunderStatDao.save(ts);
 	}
-	
+
+	public void filterFramework(List<ThunderStat> listTS){
+		if(listTS!=null && !listTS.isEmpty()){
+			for(ThunderStat ts : listTS){
+				if(isAframeworkClass(ts.getPathClassMethodName())){
+					ts.setDrawAnalysis(false);
+				}else{
+					ts.setDrawAnalysis(true);
+				}
+			}
+		}
+	}
+
+	private Boolean isAframeworkClass(String classMethodName){
+		for(String elem : listFrameworkNoAnalysis){
+			if(classMethodName.contains(elem)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 }

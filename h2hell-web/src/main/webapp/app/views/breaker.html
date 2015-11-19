@@ -8,7 +8,7 @@
 
 
 	<div class="row">
-		<div class="col-lg-4 col-md-3">
+		<div class="col-lg-3 col-md-3">
 			<div class="panel  panel-white">
 				<div class="panel-body">
 					<div style="font-size: 18px">
@@ -18,7 +18,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4 col-md-3">
+		<div class="col-lg-3 col-md-3">
 			<div class="panel  panel-white">
 				<div class="panel-body">
 					<div style="font-size: 18px">
@@ -29,7 +29,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4 col-md-3">
+		<div class="col-lg-3 col-md-3">
 			<div class="panel  panel-white">
 				<div class="panel-body">
 					<div style="font-size: 18px">
@@ -39,17 +39,21 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-lg-3 col-md-3">
+			<div>
+				<a class="btn" href="" onclick="window.open('/core/api/BreakerLog/sendCsv/{{ms.token}}')" style="font-size:18px">
+					<i class="fa fa-fire"></i> Export CSV</a>
+				<br />
+				<a class="btn" href="" onclick="window.open('/core/api/BreakerLog/sendJson/{{ms.token}}')" style="font-size:18px">
+					<i class="fa fa-fire"></i> Export JSON</a>
+				<br />
+
+
+			</div>
+		</div>
 	</div>
 
-	<!-- <div class="input-append"> -->
-	<!-- 	<select style="margin-left: 150px; width: 450px;" ng-model="token" -->
-	<!-- 		ng-options="valueApp.token as valueApp.nameApp+'-'+valueApp.token for valueApp in tokenlist"></select> -->
-	<!-- 	<button class="btn btn-primary" ng-disabled="!token" -->
-	<!-- 		ng-click="findByToken(token)">Filter by App Name</button> -->
-	<!-- </div> -->
 
-	<!-- <div class="alert alert-info" style="width: 850px; margin-left: 0px;" -->
-	<!-- 	ng-show="breakerlist.length == 0">No Log in database</div> -->
 
 
 	<div ng-show="breakerlist.length > 0">
@@ -62,7 +66,8 @@
 				<tr>
 					<th style="text-align: center; width: 250px;">Method input</th>
 					<th style="text-align: center;">Token</th>
-					<th style="text-align: center; width: 300px;">Date</th>
+					<th style="text-align: center; width: 180px;">Date</th>
+					<th style="text-align: center;">Parameters</th>
 				</tr>
 			</thead>
 			<tbody class="searchable">
@@ -70,11 +75,25 @@
 					<td style="text-align: center;">{{breaker.pathClassMethodName}}</td>
 					<td style="text-align: center;">{{breaker.token}}</td>
 					<td style="text-align: center;">{{breaker.dateIncoming}}</td>
+					<td><table class="table table-bordered table-striped">
+							<tr>
+								<th style="text-align: center;">Name</th>
+								<th style="text-align: center;">Class</th>
+								<th style="text-align: center;">Value</th>
+							</tr>
+							<tr ng-repeat="pm in breaker.parameters">
+								<td style="text-align: center; width: 250px;">{{pm.nameParameter}}</td>
+								<td style="text-align: center;">{{pm.nameClass}}</td>
+								<td style="text-align: center; width: 300px;">{{pm.data}}</td>
+							</tr>
+						</table>
+					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 </div>
+
 
 
 <script type="text/javascript">
