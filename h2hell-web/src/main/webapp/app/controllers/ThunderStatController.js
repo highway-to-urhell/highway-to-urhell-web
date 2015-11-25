@@ -17,6 +17,7 @@ var ThunderStatController = function($scope, $routeParams, $http) {
 		$scope.messageConfig='Find All Paths for application ';
 		$http.post('api/ThunderApp/findAllPaths/' + token).success(function(message) {
 				$scope.ms = message;
+				$scope.messageConfig = '';
 				$http.post('api/ThunderStat/findThunderStatByTokenAndFilter/' + token)
 					.success(function(message) {
 						$scope.ms = message;

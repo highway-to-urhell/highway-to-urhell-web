@@ -1,11 +1,9 @@
 package com.highway2urhell.rest;
 
-import com.highway2urhell.domain.H2hConfig;
-import com.highway2urhell.domain.MessageBreaker;
-import com.highway2urhell.domain.MessageMetrics;
-import com.highway2urhell.domain.MessageThunderApp;
+import com.highway2urhell.domain.*;
 import com.highway2urhell.exception.exception.NotExistThunderAppException;
 import com.highway2urhell.service.BreakerLogService;
+import com.highway2urhell.service.MessageEventService;
 import com.highway2urhell.service.MetricsTimerService;
 import com.highway2urhell.service.ThunderAppService;
 import com.wordnik.swagger.annotations.Api;
@@ -38,6 +36,8 @@ public class ThunderServerEntryRest {
 	private BreakerLogService breakerLogService;
 	@Inject
 	private MetricsTimerService metricsTimerService;
+	@Inject
+	private MessageEventService messageEventService;
 
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
@@ -74,6 +74,16 @@ public class ThunderServerEntryRest {
 	public Response addBreaker(List<MessageBreaker> listBreaker) {
 		breakerLogService.addListBreaker(listBreaker);
 		return Response.status(Status.ACCEPTED).entity("OK").build();
+	}
+
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@ApiOperation("event")
+	@Path("/event")
+	public Response event(MessageEvent me) {
+		List<MessageEvent> result = messageEventService.findEvent(me);
+		return Response.status(Status.ACCEPTED).entity(result).build();
 	}
 	
 	@POST

@@ -1,12 +1,13 @@
 package com.highway2urhell.service;
 
+import com.google.gson.Gson;
+import com.highway2urhell.dao.EventDao;
 import com.highway2urhell.dao.ThunderAppDao;
-import com.highway2urhell.domain.FilterEntryPath;
-import com.highway2urhell.domain.ThunderApp;
-import com.highway2urhell.domain.ThunderStat;
+import com.highway2urhell.domain.*;
 import com.highway2urhell.rest.domain.DataAnalysis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,37 +23,26 @@ public class LaunchService {
 	@Inject
 	private ThunderAppDao thunderAppDao;
 	@Inject
+	private EventDao eventDao;
+	@Inject
 	private ThunderStatService thunderStatService;
 
+	@Transactional
 	public String findAllPaths(String token) {
-		RestTemplate restTemplate = new RestTemplate();
 		ThunderApp th = thunderAppDao.findByToken(token);
-		if (th == null) {
-			return "No config for application with token" + token;
-		}
-		String url = th.getUrlApp() + "h2h/?paths=true";
-		String responseEntity = null;
-		LOG.info("Call app {} for find all paths", url);
-		try {
-			responseEntity = restTemplate
-					.postForObject(url, null, String.class);
-
-		} catch (RestClientException r) {
-			responseEntity = r.getMessage();
-		}
-		LOG.info("result call {} for find all paths", responseEntity);
-		return responseEntity;
+		Event ev = new Event();
+		ev.setToken(token);
+		ev.setTreat(false);
+		ev.setTypeMessageEvent(TypeMessageEvent.INIT_PATH);
+		//TODO when create reference, next feature
+		ev.setReference("NO_REF");
+		eventDao.save(ev);
+		//TODO a ameliorer
+		return "OK";
 	}
 
 
 	public String launchAnalysis(DataAnalysis da ) {
-		RestTemplate restTemplate = new RestTemplate();
-		ThunderApp th = thunderAppDao.findByToken(da.getToken());
-		if (th == null) {
-			return "No config for application with token" + da.getToken();
-		}
-		String url = th.getUrlApp() + "h2h/?launch=true";
-
 		FilterEntryPath filter = new FilterEntryPath();
 		filter.setFilter(true);
 		filter.setClassMethod(true);
@@ -64,21 +54,20 @@ public class LaunchService {
 			}
 		}
 		thunderStatService.updateListStat(da.getListTs());
-
 		filter.setListFilter(filterPath);
-		String responseEntity = null;
-		LOG.info("Call app {} for launch analysis", url);
-		try {
-			responseEntity = restTemplate
-					.postForObject(url, filter, String.class);
-			th.setAnalysis(true);
-			thunderAppDao.save(th);
+		Gson gson = new Gson();
+		String data = gson.toJson(filter);
 
-		} catch (RestClientException r) {
-			responseEntity = r.getMessage();
-		}
-		LOG.info("result call {} for launch analysis", responseEntity);
-		return responseEntity;
+		Event ev = new Event();
+		ev.setToken(da.getToken());
+		ev.setTreat(false);
+		ev.setTypeMessageEvent(TypeMessageEvent.ENABLE_ENTRY_POINT);
+		//TODO when create reference, next feature
+		ev.setReference("NO_REF");
+		ev.setData(data);
+		eventDao.save(ev);
+		//TODO a ameliorer
+		return "OK";
 	}
 
 
