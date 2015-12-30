@@ -52,6 +52,9 @@
 
 </head>
 <body class="page-header-fixed">
+    <!--[if lt IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 	<div class="overlay"></div>
 
 	<main class="page-content content-wrap">
@@ -61,7 +64,7 @@
 				<a href="javascript:void(0);"
 					class="waves-effect waves-button waves-classic push-sidebar"> <i
 					class="fa fa-bars"></i>
-				</a>  
+				</a>
 			</div>
 			<div class="logo-box">
 				<a href="index.html" class="logo-text"><span>H2H</span></a>
@@ -144,33 +147,23 @@
 	<div class="cd-overlay"></div>
 
 
-	<!-- Javascripts -->
-	<script src="assets/plugins/jquery/jquery-2.1.3.min.js"></script>
-	<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-	<script src="assets/plugins/pace-master/pace.min.js"></script>
-	<script src="assets/plugins/jquery-blockui/jquery.blockui.js"></script>
-	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-	<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-	<script src="assets/plugins/switchery/switchery.min.js"></script>
-	<script src="assets/plugins/uniform/jquery.uniform.min.js"></script>
-	<script src="assets/plugins/offcanvasmenueffects/js/classie.js"></script>
-	<script src="assets/plugins/offcanvasmenueffects/js/main.js"></script>
-	<script src="assets/plugins/waves/waves.min.js"></script>
-	<script src="assets/plugins/3d-bold-navigation/js/main.js"></script>
-	<script src="assets/plugins/waypoints/jquery.waypoints.min.js"></script>
-	<script src="assets/plugins/jquery-counterup/jquery.counterup.min.js"></script>
-	<script src="assets/plugins/toastr/toastr.min.js"></script>
-<!-- 	<script src="assets/plugins/flot/jquery.flot.min.js"></script> -->
-<!-- 	<script src="assets/plugins/flot/jquery.flot.time.min.js"></script> -->
-<!-- 	<script src="assets/plugins/flot/jquery.flot.symbol.min.js"></script> -->
-<!-- 	<script src="assets/plugins/flot/jquery.flot.resize.min.js"></script> -->
-<!-- 	<script src="assets/plugins/flot/jquery.flot.tooltip.min.js"></script> -->
-<!-- 	<script src="assets/plugins/curvedlines/curvedLines.js"></script> -->
-	<script src="assets/plugins/metrojs/MetroJs.min.js"></script>
-	<script src="assets/js/cheet.js"></script>
-	<script src="assets/js/modern.js"></script>
 
-	<script src="app/lib/angular/angular.js"></script>
+    <!-- Google Analytics: uncomment and change UA-XXXXX-X to be your site's ID.
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>-->
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+
 	<script src="app/app.js"></script>
 	<script src="app/controllers/LaunchAnalysisController.js"></script>
 	<script src="app/controllers/MetricsController.js"></script>
