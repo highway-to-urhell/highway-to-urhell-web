@@ -84,7 +84,8 @@ module.exports = function (grunt) {
                     src : [
                         'src/main/webapp/**/*.html',
                         'src/main/webapp/**/*.json',
-                        'src/main/webapp/assets/styles/**/*.css',
+                        'src/main/webapp/assets/css/**/*.css',
+                        'src/main/webapp/assets/js/**/*.{js,html}',
                         'src/main/webapp/scripts/**/*.{js,html}',
                         'src/main/webapp/assets/images/**/*.{png,jpg,jpeg,gif,webp,svg}',
                         'tmp/**/*.{css,js}'
@@ -131,7 +132,7 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: 'src/main/scss',
                     src: ['*.scss'],
-                    dest: 'src/main/webapp/assets/styles',
+                    dest: 'src/main/webapp/assets/css',
                     ext: '.css'
                 }]
             }
