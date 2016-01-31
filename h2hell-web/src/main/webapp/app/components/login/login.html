@@ -1,0 +1,20 @@
+<md-content layout-padding>
+  <form [ngFormModel]="loginForm">
+    <md-input-container class="md-block">
+      <label for="login">Login</label>
+      <input md-input ngControl="login" id="login" [(value)]="model.login">
+      <div md-messages="login">
+        <div md-message="required">This is required.</div>
+        <div md-message="maxlength">The name has to be less than 30 characters long.</div>
+      </div>
+    </md-input-container>
+    <md-input-container class="md-block">
+      <label for="password">Password</label>
+      <input md-input ngControl="password" id="password" [(value)]="model.password">
+      <div md-messages="password" role="alert">
+        <div md-message="required">This is required.</div>
+      </div>
+    </md-input-container>
+    <button md-raised-button class="md-raised md-primary">Login</button>
+  </form>
+</md-content>
