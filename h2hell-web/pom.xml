@@ -286,7 +286,7 @@
 				<configuration>
 					<stopKey>foo</stopKey>
 					<stopPort>9080</stopPort>
-                    <jettyXml>src/main/resources/jetty.xml</jettyXml>
+					<jettyXml>src/main/resources/jetty.xml</jettyXml>
 					<webAppConfig>
 						<contextPath>/core/</contextPath>
 					</webAppConfig>
@@ -309,6 +309,23 @@
 							<Implementation-Build>${buildNumber}</Implementation-Build>
 						</manifestEntries>
 					</archive>
+				</configuration>
+			</plugin>
+			 <plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>src/main/webapp/dist</directory>
+						</fileset>
+						<fileset>
+							<directory>.tmp</directory>
+						</fileset>
+						<fileset>
+							<directory>node_modules</directory>
+						</fileset>
+					</filesets>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -58,6 +58,11 @@
 			<name>Jean-Louis Boudart</name>
 			<email>jeanlouis.boudart@gmail.com</email>
 		</developer>
+		<developer>
+			<id>dufgui</id>
+			<name>Guillaume Dufour</name>
+			<email>guillaume.duff@gmail.com</email>
+		</developer>
 	</developers>
 
 	<licenses>
@@ -508,7 +513,7 @@
 									<version>[1.6.0-26,)</version>
 								</requireJavaVersion>
 								<requireMavenVersion>
-									<version>3.0.3</version>
+									<version>[3.0.3,)</version>
 								</requireMavenVersion>
 							</rules>
 						</configuration>
