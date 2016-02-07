@@ -1,6 +1,6 @@
 package com.highway2urhell.service;
 
-import com.highway2urhell.dao.EventDao;
+import com.highway2urhell.repository.EventRepository;
 import com.highway2urhell.domain.Event;
 import com.highway2urhell.domain.MessageEvent;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,12 +14,12 @@ import java.util.List;
 public class MessageEventService {
 
     @Inject
-    private EventDao eventDao;
+    private EventRepository eventRepository;
 
     @Transactional
     public List<MessageEvent> findEvent(MessageEvent meInc){
         List<MessageEvent> result = new ArrayList<MessageEvent>();
-        List<Event> listEvent = eventDao.findEventByToken(meInc.getToken());
+        List<Event> listEvent = eventRepository.findEventByToken(meInc.getToken());
         for(Event ev : listEvent){
             MessageEvent me = new MessageEvent();
             me.setId(ev.getId());
@@ -30,7 +30,7 @@ public class MessageEventService {
             result.add(me);
             //change the status
             ev.setTreat(true);
-            eventDao.save(ev);
+            eventRepository.save(ev);
         }
         return result;
     }

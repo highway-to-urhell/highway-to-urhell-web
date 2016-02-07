@@ -1,6 +1,6 @@
 package com.highway2urhell.service;
 
-import com.highway2urhell.dao.ThunderAppDao;
+import com.highway2urhell.repository.ThunderAppRepository;
 import com.highway2urhell.domain.ThunderApp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,12 +17,12 @@ public class ThunderLocalSourceService {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(ThunderLocalSourceService.class);
 	@Inject
-	private ThunderAppDao thunderAppDao;
-	
+	private ThunderAppRepository thunderAppRepository;
+
 	public String findClassAndMethod(String token,String classAndMethod){
 		String className = extractClass(classAndMethod);
 		String res =null;
-		ThunderApp th  =thunderAppDao.findByToken(token); 
+		ThunderApp th  =thunderAppRepository.findByToken(token);
 		if(th == null){
 			return "no Application";
 		}
@@ -43,8 +43,8 @@ public class ThunderLocalSourceService {
 			sb.append("/");
 			sb.append(tabClass[i]);
 		}
-		
+
 		return sb.toString();
 	}
-	
+
 }

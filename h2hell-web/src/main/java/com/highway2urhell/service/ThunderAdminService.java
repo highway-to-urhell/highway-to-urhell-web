@@ -1,8 +1,8 @@
 package com.highway2urhell.service;
 
-import com.highway2urhell.dao.BreakerLogDao;
-import com.highway2urhell.dao.ThunderAppDao;
-import com.highway2urhell.dao.ThunderStatDao;
+import com.highway2urhell.repository.BreakerLogRepository;
+import com.highway2urhell.repository.ThunderAppRepository;
+import com.highway2urhell.repository.ThunderStatRepository;
 import com.highway2urhell.domain.BreakerLog;
 import com.highway2urhell.domain.ThunderApp;
 import com.highway2urhell.domain.ThunderStat;
@@ -15,38 +15,38 @@ import java.util.List;
 @Named
 public class ThunderAdminService {
 	@Inject
-	private BreakerLogDao breakerLogDao;
+	private BreakerLogRepository breakerLogRepository;
 	@Inject
-	private ThunderStatDao thunderStatDao;
+	private ThunderStatRepository thunderStatRepository;
 	@Inject
-	private ThunderAppDao thunderAppDao;
-	
+	private ThunderAppRepository thunderAppRepository;
+
 
 	@Transactional
 	public void purgeStatByToken(String token) {
-		List<ThunderStat> liststat = thunderStatDao.findByToken(token);
+		List<ThunderStat> liststat = thunderStatRepository.findByToken(token);
 		for(ThunderStat ts : liststat){
             ts.setCount(0L);
-            thunderStatDao.save(ts);
+            thunderStatRepository.save(ts);
 		}
 		purgeBreakerByToken(token);
 	}
 
 	@Transactional
 	public void purgeBreakerByToken(String token) {
-		List<BreakerLog> listBreaker = breakerLogDao.findByToken(token);
-		breakerLogDao.deleteInBatch(listBreaker);
+		List<BreakerLog> listBreaker = breakerLogRepository.findByToken(token);
+		breakerLogRepository.deleteInBatch(listBreaker);
 	}
-	
+
 	@Transactional
 	public void deleteThunderAppByToken(String token) {
-		ThunderApp ta = thunderAppDao.findByToken(token);
-		thunderAppDao.delete(ta);
+		ThunderApp ta = thunderAppRepository.findByToken(token);
+		thunderAppRepository.delete(ta);
 		purgeBreakerByToken(token);
 		purgeStatByToken(token);
-		
+
 	}
-	
-	
+
+
 
 }

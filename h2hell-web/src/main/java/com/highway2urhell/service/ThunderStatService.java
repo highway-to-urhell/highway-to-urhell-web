@@ -1,12 +1,12 @@
 package com.highway2urhell.service;
 
-import com.highway2urhell.dao.BreakerLogDao;
-import com.highway2urhell.dao.MetricsTimerDao;
-import com.highway2urhell.dao.ThunderStatDao;
+import com.highway2urhell.repository.BreakerLogRepository;
+import com.highway2urhell.repository.MetricsTimerRepository;
+import com.highway2urhell.repository.ThunderStatRepository;
 import com.highway2urhell.domain.EntryPathData;
 import com.highway2urhell.domain.ThunderApp;
 import com.highway2urhell.domain.ThunderStat;
-import com.highway2urhell.rest.domain.MessageStat;
+import com.highway2urhell.domain.MessageStat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
@@ -38,26 +38,26 @@ public class ThunderStatService {
 		add("com.highway2urhell.servlet");
 	}};
 	@Inject
-	private ThunderStatDao thunderStatDao;
+	private ThunderStatRepository thunderStatRepository;
 	@Inject
-	private BreakerLogDao breakerLogDao;
+	private BreakerLogRepository breakerLogRepository;
 	@Inject
-	private MetricsTimerDao metricsTimerDao;
+	private MetricsTimerRepository metricsTimerRepository;
 
 	@Transactional
 	public void updateListStat(List<ThunderStat> listTs){
-		thunderStatDao.save(listTs);
+		thunderStatRepository.save(listTs);
 	}
 
 	public MessageStat analysisStat(String token){
 		MessageStat ms = new MessageStat();
 		LOG.info("analysis for token {}",token);
-		List<ThunderStat> listThunderStat = thunderStatDao.findByToken(token);
+		List<ThunderStat> listThunderStat = thunderStatRepository.findByToken(token);
 		LOG.info("SIZE stat for token {}",listThunderStat.size());
 		for (ThunderStat ts : listThunderStat) {
-			Long count = breakerLogDao.findByPathClassMethodNameAndToken(
+			Long count = breakerLogRepository.findByPathClassMethodNameAndToken(
 					ts.getPathClassMethodName(), ts.getThunderApp().getToken());
-			Long averageTime = metricsTimerDao.findAverageFromPathClassMethodNameAndToken(ts.getPathClassMethodName(), ts.getThunderApp().getToken());
+			Long averageTime = metricsTimerRepository.findAverageFromPathClassMethodNameAndToken(ts.getPathClassMethodName(), ts.getThunderApp().getToken());
 			ts.setCount(count);
 			ts.setAverageTime(averageTime);
 		}
@@ -79,8 +79,8 @@ public class ThunderStatService {
 		ms.setToken(token);
 		return ms;
 	}
-	
-	
+
+
 	@Transactional
 	public void createOrUpdateThunderStat(EntryPathData entry,
 			ThunderApp ta) {
@@ -90,7 +90,7 @@ public class ThunderStatService {
 		String httpmethod=entry.getHttpMethod().name();
 		Boolean audit = entry.getAudit();
 		String pathClassMethodName = className + "." + methodName;
-		ThunderStat ts = thunderStatDao.findByPathClassMethodNameAndToken(
+		ThunderStat ts = thunderStatRepository.findByPathClassMethodNameAndToken(
 				pathClassMethodName, ta.getToken());
 		if (ts == null) {
 			ts = new ThunderStat();
@@ -100,7 +100,7 @@ public class ThunderStatService {
             ts.setHttpmethod(httpmethod);
 			ts.setUri(uri);
 			ts.setAudit(audit);
-			thunderStatDao.save(ts);
+			thunderStatRepository.save(ts);
 		} else {
             ts.setCount(0L);
         }
@@ -109,10 +109,10 @@ public class ThunderStatService {
 
 	@Transactional
 	public void updateThunderStatFalsePositive(String id,String status){
-		ThunderStat ts = thunderStatDao.findOne(id);
+		ThunderStat ts = thunderStatRepository.findOne(id);
 		Boolean res = !Boolean.valueOf(status);
 		ts.setFalsePositive(res);
-		thunderStatDao.save(ts);
+		thunderStatRepository.save(ts);
 	}
 
 	public void filterFramework(List<ThunderStat> listTS){

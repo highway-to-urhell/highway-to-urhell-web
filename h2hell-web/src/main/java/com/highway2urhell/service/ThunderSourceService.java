@@ -1,6 +1,6 @@
 package com.highway2urhell.service;
 
-import com.highway2urhell.dao.ThunderAppDao;
+import com.highway2urhell.repository.ThunderAppRepository;
 import com.highway2urhell.domain.ThunderApp;
 import com.highway2urhell.service.helper.ThunderAppHelper;
 import org.slf4j.Logger;
@@ -16,12 +16,12 @@ public class ThunderSourceService {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(ThunderSourceService.class);
 	@Inject
-	private ThunderAppDao thunderAppDao;
+	private ThunderAppRepository thunderAppRepository;
 
 
 	public String findSource(String token,String classAndMethod) {
 		String className = extractClass(classAndMethod);
-		ThunderApp th  =thunderAppDao.findByToken(token); 
+		ThunderApp th  =thunderAppRepository.findByToken(token);
 		if(th == null){
 			return "no Application";
 		}
@@ -34,7 +34,7 @@ public class ThunderSourceService {
 		try {
 			responseEntity = restTemplate
 					.getForObject(url, String.class);
-			
+
 		} catch (RestClientException r) {
 			LOG.error("error call {} exception {}", url,r);
 			responseEntity = r.getMessage();
@@ -50,8 +50,8 @@ public class ThunderSourceService {
 			sb.append("/");
 			sb.append(tabClass[i]);
 		}
-		
+
 		return sb.toString();
 	}
-	
+
 }

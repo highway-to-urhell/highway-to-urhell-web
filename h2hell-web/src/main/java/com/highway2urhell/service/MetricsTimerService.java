@@ -1,11 +1,11 @@
 package com.highway2urhell.service;
 
 import com.google.gson.Gson;
-import com.highway2urhell.dao.MetricsTimerDao;
+import com.highway2urhell.repository.MetricsTimerRepository;
 import com.highway2urhell.domain.MessageMetrics;
 import com.highway2urhell.domain.MetricsTimer;
-import com.highway2urhell.rest.domain.MessageFilterMetricsModel;
-import com.highway2urhell.rest.domain.MessageMetricsData;
+import com.highway2urhell.domain.MessageFilterMetricsModel;
+import com.highway2urhell.domain.MessageMetricsData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
@@ -22,9 +22,9 @@ public class MetricsTimerService {
 
 	private static final Logger LOG = LoggerFactory
 			.getLogger(MetricsTimerService.class);
-	
+
 	@Inject
-	private MetricsTimerDao metricsTimerDao;
+	private MetricsTimerRepository metricsTimerRepository;
 
 
 	/**
@@ -50,7 +50,7 @@ public class MetricsTimerService {
 
 	@Transactional
 	public MessageMetricsData findMetricsInit(String token){
-		List<MetricsTimer> res = metricsTimerDao.findByToken(token);
+		List<MetricsTimer> res = metricsTimerRepository.findByToken(token);
 		MessageMetricsData message = new MessageMetricsData();
 		message.setListMetrics(res);
 		if(res.size()>0) {
@@ -67,7 +67,7 @@ public class MetricsTimerService {
 		if(lastInc == 0){
 			return findMetricsInit(token);
 		}else {
-			List<MetricsTimer> res = metricsTimerDao.findLastInc(token, lastInc);
+			List<MetricsTimer> res = metricsTimerRepository.findLastInc(token, lastInc);
 			LOG.info(" findMetricsFromLastId token " + token + " size " + res.size());
 			MessageMetricsData message = new MessageMetricsData();
 			if(res.size()>0) {
@@ -92,7 +92,7 @@ public class MetricsTimerService {
 			mt.setCpuLoadProcess(mm.getCpuLoadProcess());
 			mt.setCpuLoadSystem(mm.getCpuLoadSystem());
 			mt.setParameters(mm.getParameters());
-			metricsTimerDao.save(mt);
+			metricsTimerRepository.save(mt);
 		}catch (ParseException e){
 			LOG.error(" Impossible save metrics ", e);
 		}
@@ -101,7 +101,7 @@ public class MetricsTimerService {
 	@Transactional
 	public MessageMetricsData findMetricsWithFilter(MessageFilterMetricsModel mfm){
 		MessageMetricsData message = new MessageMetricsData();
-		message.setListMetrics(metricsTimerDao.findByFilter(mfm.getToken(),mfm.getResponseTime(), new PageRequest(0,mfm.getNbItems().intValue())));
+		message.setListMetrics(metricsTimerRepository.findByFilter(mfm.getToken(),mfm.getResponseTime(), new PageRequest(0,mfm.getNbItems().intValue())));
 		message.setLastInc(null);
 		return message;
 	}

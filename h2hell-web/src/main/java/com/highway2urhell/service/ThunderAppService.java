@@ -1,14 +1,14 @@
 package com.highway2urhell.service;
 
-import com.highway2urhell.dao.ThunderAppDao;
+import com.highway2urhell.repository.ThunderAppRepository;
 import com.highway2urhell.domain.EntryPathData;
 import com.highway2urhell.domain.H2hConfig;
 import com.highway2urhell.domain.ThunderApp;
 import com.highway2urhell.domain.ThunderStat;
 import com.highway2urhell.exception.exception.NotExistThunderAppException;
 import com.highway2urhell.exception.exception.TokenException;
-import com.highway2urhell.rest.domain.MessageGlobalStat;
-import com.highway2urhell.rest.domain.MessageType;
+import com.highway2urhell.domain.MessageGlobalStat;
+import com.highway2urhell.domain.MessageType;
 import org.apache.commons.lang.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,18 +25,18 @@ public class ThunderAppService {
 			.getLogger(ThunderAppService.class);
 
 	@Inject
-	private ThunderAppDao thunderAppDao;
+	private ThunderAppRepository thunderAppRepository;
 	@Inject
 	private ThunderStatService thunderStatService;
 
 	@Transactional
 	public List<ThunderApp> findAll() {
-		return thunderAppDao.findAll();
+		return thunderAppRepository.findAll();
 	}
 	@Transactional
 	public MessageGlobalStat findMessageGlobalStat(){
 		MessageGlobalStat mg = new MessageGlobalStat();
-		List<ThunderApp> listThunderApp = thunderAppDao.findAll();
+		List<ThunderApp> listThunderApp = thunderAppRepository.findAll();
 		mg.setNumberApplications(listThunderApp.size());
 		Integer total = 0;
 		for (ThunderApp app : listThunderApp) {
@@ -45,10 +45,10 @@ public class ThunderAppService {
 		mg.setNumberEntriesPoint(total);
 		return mg;
 	}
-	
+
 	public Collection<MessageType> findMessageType(){
 		Map<String,MessageType> map = new HashMap<String,MessageType>();
-		List<ThunderApp> listTa = thunderAppDao.findAll();
+		List<ThunderApp> listTa = thunderAppRepository.findAll();
 		for(ThunderApp ta : listTa){
 			MessageType me = map.get(ta.getTypeAppz());
 			LOG.error(ta.getTypeAppz()+"-"+map.keySet().size());
@@ -82,7 +82,7 @@ public class ThunderAppService {
 		}else{
 			th.setTypeAppz("UNKNOWN");
 		}
-		thunderAppDao.save(th);
+		thunderAppRepository.save(th);
 		return token;
 	}
 
@@ -100,12 +100,12 @@ public class ThunderAppService {
 	public ThunderApp findAppByToken(String token) {
 		return validateToken(token) ;
 	}
-	
+
 	private ThunderApp validateToken(String token) {
 		if (token == null) {
 			throw new TokenException();
 		}
-		ThunderApp ta = thunderAppDao.findByToken(token);
+		ThunderApp ta = thunderAppRepository.findByToken(token);
 		if (ta == null) {
 			throw new NotExistThunderAppException();
 		}

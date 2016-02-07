@@ -81,6 +81,8 @@
                         <li ng-hide="inProduction" ui-sref-active="active"><a ui-sref="docs" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-book"></span>
                             &#xA0;<span translate="global.menu.admin.apidocs">API</span></a></li>
                         <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+                        <li ng-hide="inProduction"><a href='/h2-console' target="_tab" data-toggle="collapse" data-target=".navbar-collapse.in"><span class="glyphicon glyphicon-hdd"></span>
+                            &#xA0;<span translate="global.menu.admin.database">Database</span></a></li>
                     </ul>
                 </li>
                 <li ui-sref-active="active" class="dropdown pointer" ng-controller="LanguageController">

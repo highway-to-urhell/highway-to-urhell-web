@@ -1,0 +1,18 @@
+h2hellweb-elasticsearch:
+  container_name: h2hellweb-elasticsearch
+  image: elasticsearch:1.7.3
+  # volumes:
+  #   - ~/volumes/jhipster/h2hellweb/elasticsearch/:/usr/share/elasticsearch/data/
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+h2hellweb-postgresql:
+  container_name: h2hellweb-postgresql
+  image: postgres:9.4.5
+  # volumes:
+  #   - ~/volumes/jhipster/h2hellweb/postgresql/:/var/lib/postgresql/
+  environment:
+    - POSTGRES_USER=h2hellweb
+    - POSTGRES_PASSWORD=
+  ports:
+    - "5432:5432"

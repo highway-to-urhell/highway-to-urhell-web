@@ -1,10 +1,10 @@
 package com.highway2urhell.service;
 
 import com.google.gson.Gson;
-import com.highway2urhell.dao.EventDao;
-import com.highway2urhell.dao.ThunderAppDao;
+import com.highway2urhell.repository.EventRepository;
+import com.highway2urhell.repository.ThunderAppRepository;
 import com.highway2urhell.domain.*;
-import com.highway2urhell.rest.domain.DataAnalysis;
+import com.highway2urhell.domain.DataAnalysis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,22 +21,22 @@ public class LaunchService {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(LaunchService.class);
 	@Inject
-	private ThunderAppDao thunderAppDao;
+	private ThunderAppRepository thunderAppRepository;
 	@Inject
-	private EventDao eventDao;
+	private EventRepository eventRepository;
 	@Inject
 	private ThunderStatService thunderStatService;
 
 	@Transactional
 	public String findAllPaths(String token) {
-		ThunderApp th = thunderAppDao.findByToken(token);
+		ThunderApp th = thunderAppRepository.findByToken(token);
 		Event ev = new Event();
 		ev.setToken(token);
 		ev.setTreat(false);
 		ev.setTypeMessageEvent(TypeMessageEvent.INIT_PATH);
 		//TODO when create reference, next feature
 		ev.setReference("NO_REF");
-		eventDao.save(ev);
+		eventRepository.save(ev);
 		//TODO a ameliorer
 		return "OK";
 	}
@@ -65,7 +65,7 @@ public class LaunchService {
 		//TODO when create reference, next feature
 		ev.setReference("NO_REF");
 		ev.setData(data);
-		eventDao.save(ev);
+		eventRepository.save(ev);
 		//TODO a ameliorer
 		return "OK";
 	}
