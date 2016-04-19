@@ -121,7 +121,11 @@ public class ThunderStatService {
 				if(isAframeworkClass(ts.getPathClassMethodName())){
 					ts.setDrawAnalysis(false);
 				}else{
-					ts.setDrawAnalysis(true);
+					if(!ts.getAudit()){
+						ts.setDrawAnalysis(true);
+					}else{
+						ts.setDrawAnalysis(false);
+					}
 				}
 			}
 		}
