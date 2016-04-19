@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:task="http://www.springframework.org/schema/task"
+	   default-lazy-init="true"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+
+
+
+
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+	<description><![CDATA[
+		Main entry point for spring configuration
+	]]></description>
+
+	<!-- context -->
+	<context:component-scan base-package="com.mycompany"/>
+	<context:property-placeholder location="classpath:mycompany.properties" />
+
+	<context:annotation-config  />
+
+	<!-- task -->
+	<task:annotation-driven executor="myExecutor"
+		scheduler="myScheduler" />
+	<task:executor id="myExecutor" pool-size="5" />
+	<task:scheduler id="myScheduler" pool-size="10" />
+
+
+	<!--  i18n  -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="demo_message"></property>
+	</bean>
+
+	<!-- datasource -->
+	<bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+		destroy-method="close" lazy-init="false">
+		<description><![CDATA[
+			Simple datasource. This is a direct access to the datasource that can be used for specific queries that need to bypass JPA functionalities.
+			However, if you need to use JDBC, please look at hibernate SQL-QUERIES, they would most probably be a more elegant way to solve your problem.
+		]]></description>
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="initialSize" value="1" />
+		<property name="maxActive" value="200" />
+		<property name="maxIdle" value="1" />
+		<property name="maxWait" value="2000" />
+		<property name="defaultAutoCommit" value="false" />
+		<property name="removeAbandoned" value="true" />
+		<property name="removeAbandonedTimeout" value="60" />
+	</bean>
+
+</beans>
