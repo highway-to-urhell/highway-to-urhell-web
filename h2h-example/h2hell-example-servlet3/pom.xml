@@ -8,7 +8,7 @@
     <name>Servlet 3 Webapp</name>
 
     <properties>
-        <highway2urhell.version>1.0.2-SNAPSHOT</highway2urhell.version>
+        <highway2urhell.version>1.0.6-SNAPSHOT</highway2urhell.version>
     </properties>
 
 
@@ -92,7 +92,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
                     <jvmArgs>
-                        -javaagent:${project.build.directory}/h2hell-distribution-${highway2urhell.version}/h2hell-core-${highway2urhell.version}.jar -Djava.ext.dirs=${project.build.directory}/h2hell-distribution-${highway2urhell.version}/ -DH2H_CONFIG=${project.build.directory}/classes/config.properties
+                        -javaagent:${settings.localRepository}/com/highway2urhell/h2hell-core/${highway2urhell.version}/h2hell-core-${highway2urhell.version}.jar -DH2H_INSTALL=${settings.localRepository}/com/highway2urhell/h2hell-distribution/${highway2urhell.version}/h2hell-distribution-${highway2urhell.version}/ -DH2H_CONFIG=${project.build.directory}/classes/config.properties
                     </jvmArgs>
                     <stopKey>foo</stopKey>
                     <stopPort>9999</stopPort>

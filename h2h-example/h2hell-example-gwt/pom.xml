@@ -15,6 +15,7 @@ http://maven.apache.org/maven-v4_0_0.xsd">
         <gwtVersion>2.5.0</gwtVersion>
         <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <highway2urhell.version>1.0.6-SNAPSHOT</highway2urhell.version>
     </properties>
 
     <dependencies>
@@ -135,7 +136,7 @@ http://maven.apache.org/maven-v4_0_0.xsd">
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
                    <jvmArgs>
-                       -javaagent:${project.build.directory}/h2hell-distribution-1.0.2-SNAPSHOT/h2hell-core-1.0.2-SNAPSHOT.jar -Djava.ext.dirs=${project.build.directory}/h2hell-distribution-1.0.2-SNAPSHOT/ -DH2H_CONFIG=${project.build.directory}/classes/config.properties -DH2H_PATH=${project.basedir}/src/main/webapp/
+                       -javaagent:${settings.localRepository}/com/highway2urhell/h2hell-core/${highway2urhell.version}/h2hell-core-${highway2urhell.version}.jar -DH2H_INSTALL=${settings.localRepository}/com/highway2urhell/h2hell-distribution/${highway2urhell.version}/h2hell-distribution-${highway2urhell.version}/ -DH2H_CONFIG=${project.build.directory}/classes/config.properties
 					</jvmArgs>
                     <stopKey>foo</stopKey>
                     <stopPort>9999</stopPort>

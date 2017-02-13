@@ -35,6 +35,9 @@
 		<jdk.version>1.7</jdk.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<highway2urhell.version>1.0.6-SNAPSHOT</highway2urhell.version>
+
 	</properties>
 	<dependencies>
 		<dependency>
@@ -306,7 +309,7 @@
 	<!-- BUILD -->
 	<!-- ~~~~~ -->
 	<build>
-		<defaultGoal>jetty:run</defaultGoal>
+		<defaultGoal>jetty:run-forked</defaultGoal>
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
@@ -320,6 +323,9 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.2.8.v20150217</version>
 				<configuration>
+					<jvmArgs>
+						-javaagent:${settings.localRepository}/com/highway2urhell/h2hell-core/${highway2urhell.version}/h2hell-core-${highway2urhell.version}.jar -DH2H_INSTALL=${settings.localRepository}/com/highway2urhell/h2hell-distribution/${highway2urhell.version}/h2hell-distribution-${highway2urhell.version}/ -DH2H_CONFIG=${project.build.directory}/classes/config.properties
+					</jvmArgs>
 					<stopKey>foo</stopKey>
 					<stopPort>9080</stopPort>
                     <jettyXml>src/main/resources/jetty.xml</jettyXml>

@@ -7,6 +7,11 @@
 	<version>1.0</version>
 	<name>struts2</name>
 	<url>http://maven.apache.org</url>
+
+	<properties>
+		<highway2urhell.version>1.0.6-SNAPSHOT</highway2urhell.version>
+	</properties>
+
 	<dependencies>
                <dependency>
 			<groupId>junit</groupId>
@@ -98,7 +103,7 @@
 								<artifactItem>
 									<groupId>com.highway2urhell</groupId>
 									<artifactId>h2hell-distribution</artifactId>
-									<version>1.0.6-SNAPSHOT</version>
+									<version>${highway2urhell.version}</version>
 									<classifier>distrib</classifier>
 									<type>zip</type>
 								</artifactItem>
@@ -115,7 +120,7 @@
 				<version>9.2.8.v20150217</version>
 				<configuration>
 					<jvmArgs>
-						-javaagent:${settings.localRepository}/com/highway2urhell/h2hell-core/1.0.6-SNAPSHOT/h2hell-core-1.0.6-SNAPSHOT.jar -DH2H_INSTALL=${settings.localRepository}/com/highway2urhell/h2hell-distribution/1.0.6-SNAPSHOT/h2hell-distribution-1.0.6-SNAPSHOT/ -DH2H_CONFIG=${project.build.directory}/classes/config.properties
+						-javaagent:${settings.localRepository}/com/highway2urhell/h2hell-core/${highway2urhell.version}/h2hell-core-${highway2urhell.version}.jar -DH2H_INSTALL=${settings.localRepository}/com/highway2urhell/h2hell-distribution/${highway2urhell.version}/h2hell-distribution-${highway2urhell.version}/ -DH2H_CONFIG=${project.build.directory}/classes/config.properties
 					</jvmArgs>
 					<stopKey>foo</stopKey>
 					<stopPort>9999</stopPort>
@@ -123,7 +128,7 @@
 						<contextPath>/core/</contextPath>
 					</webAppConfig>
 				</configuration>
-			</plugin>	
+			</plugin>
 		</plugins>
 	</build>
 </project>

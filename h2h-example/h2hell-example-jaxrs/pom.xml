@@ -16,7 +16,7 @@
 		<spring.version>4.0.4.RELEASE</spring.version>
 		<jersey.version>2.8</jersey.version>
 		<jackson.version>2.3.1</jackson.version>
-		<highway2urhell.version>1.0.2-SNAPSHOT</highway2urhell.version>
+		<highway2urhell.version>1.0.6-SNAPSHOT</highway2urhell.version>
 	</properties>
 
 	<dependencies>
@@ -219,8 +219,8 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <configuration>
                     <jvmArgs>
-						-javaagent:${project.build.directory}/h2hell-distribution-${highway2urhell.version}/h2hell-core-${highway2urhell.version}.jar -Djava.ext.dirs=${project.build.directory}/h2hell-distribution-${highway2urhell.version}/ -DH2H_CONFIG=${project.build.directory}/classes/config.properties -DH2H_PATH=${project.basedir}/src/main/webapp/
-                    </jvmArgs>
+						-javaagent:${settings.localRepository}/com/highway2urhell/h2hell-core/${highway2urhell.version}/h2hell-core-${highway2urhell.version}.jar -DH2H_INSTALL=${settings.localRepository}/com/highway2urhell/h2hell-distribution/${highway2urhell.version}/h2hell-distribution-${highway2urhell.version}/ -DH2H_CONFIG=${project.build.directory}/classes/config.properties
+					</jvmArgs>
                     <stopKey>foo</stopKey>
                     <stopPort>9999</stopPort>
                     <webAppConfig>

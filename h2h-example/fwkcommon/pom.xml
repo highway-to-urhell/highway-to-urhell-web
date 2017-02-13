@@ -7,6 +7,9 @@
         <artifactId>fwk-common</artifactId>
         <name>fwk-common</name>
 
+    <properties>
+        <highway2urhell.version>1.0.6-SNAPSHOT</highway2urhell.version>
+    </properties>
 
     <dependencies>
         <!-- ~~~~~~ -->
