@@ -91,7 +91,7 @@
                                 <artifactItem>
                                     <groupId>com.highway2urhell</groupId>
                                     <artifactId>h2hell-distribution</artifactId>
-                                    <version>1.0.4-SNAPSHOT</version>
+                                    <version>${highway2urhell.version}</version>
                                     <classifier>distrib</classifier>
                                     <type>zip</type>
                                 </artifactItem>
