@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.highway2urhell</groupId>
-	<artifactId>struts2</artifactId>
+	<artifactId>h2hell-example-struts2</artifactId>
 	<packaging>war</packaging>
 	<version>1.0</version>
-	<name>struts2</name>
+	<name>h2hell-example-struts2</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>

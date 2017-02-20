@@ -5,7 +5,7 @@
     <artifactId>h2hell-example-jsf2</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>JavaServerFaces Maven Webapp</name>
+    <name>h2hell-example-jsf2</name>
 
     <properties>
         <highway2urhell.version>1.0.6-SNAPSHOT</highway2urhell.version>

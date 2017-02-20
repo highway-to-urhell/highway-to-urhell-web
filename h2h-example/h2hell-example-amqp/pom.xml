@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.highway2urhell</groupId>
 	<artifactId>h2hell-example-amqp-root</artifactId>
-	<name>Spring AMQP Samples</name>
+	<name>h2hell-example-amqp-root</name>
 	<version>1.4.5.RELEASE</version>
 	<packaging>pom</packaging>
 	<modules>
