@@ -7,7 +7,7 @@
             <New class="org.eclipse.jetty.server.ServerConnector">
                 <Arg name="server"><Ref refid="Server" /></Arg>
                 <Set name="host"><Property name="jetty.host" /></Set>
-                <Set name="port"><Property name="jetty.port" default="8090" /></Set>
+                <Set name="port"><Property name="jetty.port" default="9090" /></Set>
                 <Set name="idleTimeout">30000</Set>
             </New>
         </Arg>
